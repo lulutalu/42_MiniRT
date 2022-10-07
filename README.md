@@ -9,3 +9,4 @@ and the objective is to not be afraid of implementing mathematical formulas agai
 ## Sources
 
 https://web.cse.ohio-state.edu/~shen.94/681/Site/Slides_files/basic_algo.pdf<br>
+https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/how-does-it-work<br>
