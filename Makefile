@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/10/12 17:21:13 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/10/12 20:12:06 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ MKDIR			= mkdir -p
 RM				= rm -rf
 
 
-CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
 MLXFLAGS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 
@@ -74,7 +74,7 @@ ${NAME}:		${OBJS}
 				@printf "${GREEN} 💻 Successfully created ${NAME} executable${RESET} ✅\n"
 				@printf "${TSEP}\n"
 
-$(O_DIR)/%.o : $(SRCS_DIR)/%.c includes/miniRT.h
+$(O_DIR)/%.o : $(SRCS_DIR)/%.c includes/miniRT.h Makefile
 				@${MKDIR} $(dir $@)
 				@printf "\e[4m\e[1mCompiling ${NAME} 🚧\n${RESET}"
 				@${CC} ${CFLAGS} -Imlx -o $@ -c $<

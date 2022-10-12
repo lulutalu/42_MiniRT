@@ -6,12 +6,16 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/12 16:57:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/12 20:24:44 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_RT_H
 # define MINI_RT_H
+
+/*
+ * Extern Librarys include
+*/
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -20,8 +24,40 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stdbool.h>
+
+/*
+ * Mlx and Ft libraries include
+*/
 
 # include "utils.h"
 # include "../mlx/mlx.h"
+
+/*
+ * Structures
+*/
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*window;
+	t_data	frame1;
+	t_data	frame2;
+	int		x_start;
+	int		y_start;
+	int		x_end;
+	int		y_end;
+	int		frame;
+	bool	direction;
+}				t_mlx;	
 
 #endif
