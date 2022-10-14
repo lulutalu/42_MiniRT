@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/14 19:43:39 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:07:32 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ typedef struct s_obj
 	float	diameter;
 	float	height;
 }				t_obj;
+
+typedef struct s_main
+{
+	t_obj	*obj;
+	t_mlx	mlx;
+}				t_main;
 
 /*
  * Functions Prototype
