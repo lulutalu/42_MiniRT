@@ -6,12 +6,12 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/14 20:07:32 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/14 22:49:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#ifndef MINIRT_H
+# define MINIRT_H
 
 /*
  * Extern Librarys include
@@ -80,9 +80,9 @@ typedef struct s_mlx
 
 typedef struct s_rgb
 {
-	int	red;
-	int	green;
-	int	blue;
+	int		red;
+	int		green;
+	int		blue;
 }				t_rgb;
 
 typedef struct s_point
@@ -120,5 +120,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		keyhook(int keycode, t_mlx *mlx);
 int		close_window(int keycode, t_mlx *mlx);
 void	rt_init(t_mlx *mlx);
+
+/////////////////////////		colors.c		////////////////////////////////
+
+int		create_trgb(int t, int r, int g, int b);
 
 #endif
