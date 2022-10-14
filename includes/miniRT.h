@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/12 20:24:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:31:34 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*window;
-	t_data	frame1;
-	t_data	frame2;
+	t_data	img;
 	int		x_start;
 	int		y_start;
 	int		x_end;
