@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/14 18:09:57 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:43:58 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(void)
 {
 	t_mlx	mlx;
 
+	//Bonsoir
 	rt_init(&mlx);
 	mlx_hook(mlx.window, 2, (1L << 13), keyhook, &mlx);
 	mlx_loop_hook(mlx.mlx, movement, &mlx);
