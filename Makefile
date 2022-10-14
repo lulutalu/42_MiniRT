@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/10/14 13:42:36 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/10/14 18:03:01 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRCS_DIR		:= ./srcs
 
 
 ##############################   FILES  ########################################
-SRCS_FILES		= main.c
+SRCS_FILES		= main.c \
+				  mlx_utils.c
 ################################################################################
 
 OBJS			:= $(addprefix $(O_DIR)/, $(SRCS_FILES:.c=.o))
@@ -50,7 +51,7 @@ MKDIR			= mkdir -p
 RM				= rm -rf
 
 
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address
 MLXFLAGS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 

@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/14 17:31:34 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:29:37 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@
 # include "../mlx/mlx.h"
 
 /*
+ * Defines
+*/
+
+/////////////////////////		Arrows		////////////////////////////////////
+
+# define UP_ARROW 126
+# define DOWN_ARROW 125
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
+
+# define ESC 53
+
+/*
  * Structures
 */
 
@@ -57,6 +70,17 @@ typedef struct s_mlx
 	int		y_end;
 	int		frame;
 	bool	direction;
-}				t_mlx;	
+}				t_mlx;
+
+/*
+ * Functions Prototype
+*/
+
+/////////////////////////		mlx_utils.c		////////////////////////////////
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		keyhook(int keycode, t_mlx *mlx);
+int		close_window(int keycode, t_mlx *mlx);
+void	rt_init(t_mlx *mlx);
 
 #endif
