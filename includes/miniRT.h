@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/14 18:29:37 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:43:39 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
  * Defines
 */
 
-/////////////////////////		Arrows		////////////////////////////////////
+/////////////////////////		Mlx Key		////////////////////////////////////
 
 # define UP_ARROW 126
 # define DOWN_ARROW 125
@@ -45,6 +45,12 @@
 # define RIGHT_ARROW 124
 
 # define ESC 53
+
+/////////////////////////		Macro		////////////////////////////////////
+
+# define SPHERE 0
+# define PLANE 1
+# define CYLINDER 2
 
 /*
  * Structures
@@ -71,6 +77,32 @@ typedef struct s_mlx
 	int		frame;
 	bool	direction;
 }				t_mlx;
+
+typedef struct s_rgb
+{
+	int	red;
+	int	green;
+	int	blue;
+}				t_rgb;
+
+typedef struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_point;
+
+typedef struct s_obj
+{
+	int		id;
+	float	light_range;
+	t_rgb	rgb;
+	t_point	pos;
+	t_point	vec;
+	float	fov;
+	float	diameter;
+	float	height;
+}				t_obj;
 
 /*
  * Functions Prototype
