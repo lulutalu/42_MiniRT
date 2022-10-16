@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/14 22:49:11 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:06:50 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 
 typedef struct s_data
 {
-	void	*img;
+	void	*ptr;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -67,7 +67,7 @@ typedef struct s_data
 
 typedef struct s_mlx
 {
-	void	*mlx;
+	void	*ptr;
 	void	*window;
 	t_data	img;
 	int		x_start;
@@ -92,6 +92,12 @@ typedef struct s_point
 	float	z;
 }				t_point;
 
+typedef struct s_ray
+{
+	t_point	vec1;
+	t_point	vec2;
+}				t_ray;
+
 typedef struct s_obj
 {
 	int		id;
@@ -106,7 +112,7 @@ typedef struct s_obj
 
 typedef struct s_main
 {
-	t_obj	*obj;
+	t_obj	obj; //remember to declare it as a pointer
 	t_mlx	mlx;
 }				t_main;
 
@@ -124,5 +130,19 @@ void	rt_init(t_mlx *mlx);
 /////////////////////////		colors.c		////////////////////////////////
 
 int		create_trgb(int t, int r, int g, int b);
+
+/////////////////////////		vector.c		////////////////////////////////
+
+float	vec_length(t_point vec);
+t_point	make_unit_vector(t_point vec);
+t_point	vec_addition(t_point rhs, t_point lhs);
+t_point	vec_multiplication(t_point rhs, t_point lhs);
+t_point	vec_float_multi(float m, t_point vec);
+
+/////////////////////////		vector2.c		////////////////////////////////
+
+t_point	new_vec(float x, float y, float z);
+float	dot(t_point rhs, t_point lhs);
+t_point	vec_minus(t_point lhs, t_point rhs);
 
 #endif
