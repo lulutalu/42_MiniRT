@@ -69,8 +69,8 @@ void	pixelColor(t_main *main, t_ray ray, int x, int y)
 	{
 		hitPoint = vec_addition(ray.origin, vec_float_multi(t, ray.direction));
 		N = make_unit_vector(hitPoint);
-		light = make_unit_vector(new_vec(4.0f, 4.0f, -2.0f));
-		d = fmax(dot(N, vec_float_multi(-1.0f, light)), 0.0f);
+		light = make_unit_vector(new_vec(5.0f, 5.0f, 1.5f));
+		d = fmax(dot(N, light), 0.0f);
 		putPixelColor(&main->mlx, x, y, vec_float_multi(d, new_vec(0.0f, 0.0f, 1)));
 	}
 }
