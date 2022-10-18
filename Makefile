@@ -34,6 +34,8 @@ SRCS_FILES		= main.c \
 				  colors.c \
 				  vector.c \
 				  vector2.c \
+					raytracing.c \
+
 ################################################################################
 
 OBJS			:= $(addprefix $(O_DIR), $(SRCS_FILES:.c=.o))

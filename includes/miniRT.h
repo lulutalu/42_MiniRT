@@ -122,12 +122,14 @@ typedef struct s_main
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		keyhook(int keycode, t_mlx *mlx);
+void	image_init(t_mlx *mlx);
 int		close_window(int keycode, t_mlx *mlx);
 void	rt_init(t_mlx *mlx);
 
 /////////////////////////		colors.c		////////////////////////////////
 
 int		create_trgb(int t, int r, int g, int b);
+void	putPixelColor(t_mlx *mlx, int x, int y, t_vec3 rgb);
 
 /////////////////////////		vector.c		////////////////////////////////
 
@@ -142,5 +144,12 @@ t_vec3	vec_float_multi(float m, t_vec3 vec);
 t_vec3	new_vec(float x, float y, float z);
 float	dot(t_vec3 lhs, t_vec3 rhs);
 t_vec3	vec_minus(t_vec3 lhs, t_vec3 rhs);
+
+///////////////////////		raytracing.c	////////////////////////////////
+
+int		frame_loop(t_main *main);
+void	pixelColor(t_main *main, t_ray ray, int x, int y);
+float	hit_sphere(t_vec3 center, float radius, t_ray ray);
+t_ray	rayGeneration(t_main *main, int x, int y);
 
 #endif
