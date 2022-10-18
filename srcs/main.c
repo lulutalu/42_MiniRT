@@ -20,35 +20,29 @@ float	hit_sphere(t_point center, float radius, t_ray ray)
 	float	c;
 	float	discri;
 
-	oc = vec_minus(ray.vec2, center);
-	a = dot(ray.vec2, ray.vec2);
-	b = 2.0 * dot(oc, ray.vec2);
+	oc = vec_minus(ray.origin, center);
+	a = dot(ray.direction, ray.direction);
+	b = 2.0f * dot(oc, ray.direction);
 	c = dot(oc, oc) - (radius * radius);
-	discri = (b * b) - (4 * a * c);
-	if (discri < 0)
-		return (-1.0);
+	discri = b * b - (4 * a * c);
+	if (discri < 0.0f)
+		return (-1.0f);
 	else
-		return ((b - sqrtf(discri)) / (2.0 * a));
+		return ((-b - sqrtf(discri)) / (2.0f * a));
 }
 
 t_point	color(t_ray ray)
 {
-	t_point	unit_direction;
-	t_point	vec_res;
-	t_point	N;
 	float	t;
+	t_point	N;
 
 	t = hit_sphere(new_vec(0, 0, -1), 0.5, ray);
-	if (t > 0.0)
+	if (t > 0.0f)
 	{
-		N = make_unit_vector(vec_minus(vec_addition(ray.vec1, vec_float_multi(t, ray.vec2)), new_vec(0, 0, -1)));
-		return (vec_float_multi(0.5, new_vec(N.x + 1, N.y + 1, N.z + 1)));
+		N = make_unit_vector(vec_minus(vec_addition(vec_float_multi(t, ray.direction), ray.origin), new_vec(0, 0, -1)));
+		return (vec_float_multi(0.5f, new_vec(N.x + 1.0f, N.y + 1.0f, N.z + 1.0f)));
 	}
-	unit_direction = make_unit_vector(ray.vec2);
-	t = 0.5 * (unit_direction.y + 1.0);
-	vec_res = vec_float_multi(1.0 - t, new_vec(1.0, 1.0, 1.0));
-	vec_res = vec_addition(vec_res, vec_float_multi(t, new_vec(0.5, 0.7, 1.0)));
-	return (vec_res);
+	return (new_vec(1, 1, 1));
 }
 
 int	movement(t_main *main)
@@ -58,21 +52,10 @@ int	movement(t_main *main)
 	t_point	vertical;
 	t_point	origin;
 
-	lower_left.x = -2.0;
-	lower_left.y = -1.0;
-	lower_left.z = -1.0;
-
-	horizontal.x = 4.0;
-	horizontal.y = 0.0;
-	horizontal.z = 0.0;
-
-	vertical.x = 0.0;
-	vertical.y = 2.0;
-	vertical.z = 0.0;
-
-	origin.x = 0.0;
-	origin.y = 0.0;
-	origin.z = 0.0;
+	lower_left = new_vec(-2.0, -1.0, -1.0);
+	horizontal = new_vec(4.0, 0.0, 0.0);
+	vertical = new_vec(0.0, 2.0, 0.0);
+	origin = new_vec(0.0, 0.0, 1.0);
 
 	float	u;
 	float	v;
@@ -81,22 +64,22 @@ int	movement(t_main *main)
 
 	t_point	vec;
 
-	main->mlx.img.ptr = mlx_new_image(main->mlx.ptr, 1920, 1080);
+	main->mlx.img.ptr = mlx_new_image(main->mlx.ptr, main->mlx.x_res, main->mlx.y_res);
 	main->mlx.img.addr = mlx_get_data_addr(main->mlx.img.ptr, \
 			&main->mlx.img.bits_per_pixel, &main->mlx.img.line_length, \
 			&main->mlx.img.endian);
 
 	main->obj.pos.y = 0;
-	while (main->obj.pos.y < 1079)
+	while (main->obj.pos.y < main->mlx.y_res)
 	{
 		main->obj.pos.x = 0;
-		while (main->obj.pos.x < 1919)
+		while (main->obj.pos.x < main->mlx.x_res)
 		{
-			u = main->obj.pos.x / 1920;
-			v = main->obj.pos.y / 1080;
+			u = main->obj.pos.x / main->mlx.x_res;
+			v = main->obj.pos.y / main->mlx.y_res;
 
-			ray.vec1 = origin;
-			ray.vec2 = vec_addition(lower_left, vec_minus(vec_addition(vec_float_multi(u, horizontal), vec_float_multi(v, vertical)), origin));
+			ray.origin = origin;
+			ray.direction = vec_addition(lower_left, vec_minus(vec_addition(vec_float_multi(u, horizontal), vec_float_multi(v, vertical)), origin));
 
 			vec = color(ray);
 

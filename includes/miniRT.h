@@ -67,15 +67,12 @@ typedef struct s_data
 
 typedef struct s_mlx
 {
-	void	*ptr;
-	void	*window;
+	void		*ptr;
+	void		*window;
 	t_data	img;
-	int		x_start;
-	int		y_start;
-	int		x_end;
-	int		y_end;
-	int		frame;
-	bool	direction;
+	float		aspect_ratio;
+	int			x_res;
+	int			y_res;
 }				t_mlx;
 
 typedef struct s_rgb
@@ -94,8 +91,8 @@ typedef struct s_point
 
 typedef struct s_ray
 {
-	t_point	vec1;
-	t_point	vec2;
+	t_point	origin;
+	t_point	direction;
 }				t_ray;
 
 typedef struct s_obj
@@ -114,6 +111,7 @@ typedef struct s_main
 {
 	t_obj	obj; //remember to declare it as a pointer
 	t_mlx	mlx;
+	float	aspect_ratio;
 }				t_main;
 
 /*
