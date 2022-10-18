@@ -107,7 +107,8 @@ int	main(void)
 
 	rt_init(&main.mlx);
 	mlx_hook(main.mlx.window, 2, (1L << 13), keyhook, &main.mlx);
-	movement(&main);
+	mlx_loop_hook(main.mlx.ptr, movement, &main);
+//	movement(&main);
 	mlx_loop(main.mlx.ptr);
 	return (1);
 }

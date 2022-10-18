@@ -22,7 +22,7 @@ t_point	new_vec(float x, float y, float z)
 	return (new);
 }
 
-float	dot(t_point rhs, t_point lhs)
+float	dot(t_point lhs, t_point rhs)
 {
 	float	res;
 

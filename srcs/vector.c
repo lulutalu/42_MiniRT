@@ -32,7 +32,7 @@ t_point	make_unit_vector(t_point vec)
 	return (newVec);
 }
 
-t_point	vec_addition(t_point rhs, t_point lhs)
+t_point	vec_addition(t_point lhs, t_point rhs)
 {
 	t_point	res;
 
@@ -42,7 +42,7 @@ t_point	vec_addition(t_point rhs, t_point lhs)
 	return (res);
 }
 
-t_point	vec_multiplication(t_point rhs, t_point lhs)
+t_point	vec_multiplication(t_point lhs, t_point rhs)
 {
 	t_point res;
 

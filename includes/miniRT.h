@@ -133,14 +133,14 @@ int		create_trgb(int t, int r, int g, int b);
 
 float	vec_length(t_point vec);
 t_point	make_unit_vector(t_point vec);
-t_point	vec_addition(t_point rhs, t_point lhs);
-t_point	vec_multiplication(t_point rhs, t_point lhs);
+t_point	vec_addition(t_point lhs, t_point rhs);
+t_point	vec_multiplication(t_point lhs, t_point rhs);
 t_point	vec_float_multi(float m, t_point vec);
 
 /////////////////////////		vector2.c		////////////////////////////////
 
 t_point	new_vec(float x, float y, float z);
-float	dot(t_point rhs, t_point lhs);
+float	dot(t_point lhs, t_point rhs);
 t_point	vec_minus(t_point lhs, t_point rhs);
 
 #endif
