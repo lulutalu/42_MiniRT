@@ -12,9 +12,9 @@
 
 #include "../includes/miniRT.h"
 
-t_point	new_vec(float x, float y, float z)
+t_vec3	new_vec(float x, float y, float z)
 {
-	t_point	new;
+	t_vec3	new;
 
 	new.x = x;
 	new.y = y;
@@ -22,7 +22,7 @@ t_point	new_vec(float x, float y, float z)
 	return (new);
 }
 
-float	dot(t_point lhs, t_point rhs)
+float	dot(t_vec3 lhs, t_vec3 rhs)
 {
 	float	res;
 
@@ -30,9 +30,9 @@ float	dot(t_point lhs, t_point rhs)
 	return (res);
 }
 
-t_point	vec_minus(t_point lhs, t_point rhs)
+t_vec3	vec_minus(t_vec3 lhs, t_vec3 rhs)
 {
-	t_point	res;
+	t_vec3	res;
 
 	res.x = lhs.x - rhs.x;
 	res.y = lhs.y - rhs.y;

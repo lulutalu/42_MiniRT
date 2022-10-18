@@ -12,9 +12,9 @@
 
 #include "../includes/miniRT.h"
 
-float	hit_sphere(t_point center, float radius, t_ray ray)
+float	hit_sphere(t_vec3 center, float radius, t_ray ray)
 {
-	t_point	oc;
+	t_vec3	oc;
 	float	a;
 	float	b;
 	float	c;
@@ -31,13 +31,13 @@ float	hit_sphere(t_point center, float radius, t_ray ray)
 		return ((-b - sqrtf(discri)) / (2.0f * a));
 }
 
-t_point	color(t_ray ray)
+t_vec3	color(t_ray ray)
 {
 	float	t;
 	float	d;
-	t_point	N;
-	t_point	hitPoint;
-	t_point	light;
+	t_vec3	N;
+	t_vec3	hitPoint;
+	t_vec3	light;
 
 	t = hit_sphere(new_vec(0, 0, 0), 0.5, ray);
 	if (t < 0.0f)
@@ -51,10 +51,10 @@ t_point	color(t_ray ray)
 
 int	movement(t_main *main)
 {
-	t_point	lower_left;
-	t_point	horizontal;
-	t_point	vertical;
-	t_point	origin;
+	t_vec3	lower_left;
+	t_vec3	horizontal;
+	t_vec3	vertical;
+	t_vec3	origin;
 
 	lower_left = new_vec(-2.0, -1.0, -1.0);
 	horizontal = new_vec(4.0, 0.0, 0.0);
@@ -66,7 +66,7 @@ int	movement(t_main *main)
 
 	t_ray	ray;
 
-	t_point	vec;
+	t_vec3	vec;
 
 	main->mlx.img.ptr = mlx_new_image(main->mlx.ptr, main->mlx.x_res, main->mlx.y_res);
 	main->mlx.img.addr = mlx_get_data_addr(main->mlx.img.ptr, \

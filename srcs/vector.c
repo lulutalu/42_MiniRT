@@ -12,7 +12,7 @@
 
 #include "../includes/miniRT.h"
 
-float	vec_length(t_point vec)
+float	vec_length(t_vec3 vec)
 {
 	float	res;
 
@@ -20,9 +20,9 @@ float	vec_length(t_point vec)
 	return (res);
 }
 
-t_point	make_unit_vector(t_point vec)
+t_vec3	make_unit_vector(t_vec3 vec)
 {
-	t_point	newVec;
+	t_vec3	newVec;
 	float	k;
 
 	k = 1 / vec_length(vec);
@@ -32,9 +32,9 @@ t_point	make_unit_vector(t_point vec)
 	return (newVec);
 }
 
-t_point	vec_addition(t_point lhs, t_point rhs)
+t_vec3	vec_addition(t_vec3 lhs, t_vec3 rhs)
 {
-	t_point	res;
+	t_vec3	res;
 
 	res.x = rhs.x + lhs.x;
 	res.y = rhs.y + lhs.y;
@@ -42,9 +42,9 @@ t_point	vec_addition(t_point lhs, t_point rhs)
 	return (res);
 }
 
-t_point	vec_multiplication(t_point lhs, t_point rhs)
+t_vec3	vec_multiplication(t_vec3 lhs, t_vec3 rhs)
 {
-	t_point res;
+	t_vec3 res;
 
 	res.x = rhs.x * lhs.x;
 	res.y = rhs.y * lhs.y;
@@ -52,9 +52,9 @@ t_point	vec_multiplication(t_point lhs, t_point rhs)
 	return (res);
 }
 
-t_point	vec_float_multi(float m, t_point vec)
+t_vec3	vec_float_multi(float m, t_vec3 vec)
 {
-	t_point	res;
+	t_vec3	res;
 
 	res.x = m * vec.x;
 	res.y = m * vec.y;

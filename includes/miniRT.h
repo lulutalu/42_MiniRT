@@ -63,7 +63,7 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
+}							t_data;
 
 typedef struct s_mlx
 {
@@ -73,7 +73,7 @@ typedef struct s_mlx
 	float		aspect_ratio;
 	int			x_res;
 	int			y_res;
-}				t_mlx;
+}							t_mlx;
 
 typedef struct s_rgb
 {
@@ -82,29 +82,29 @@ typedef struct s_rgb
 	int		blue;
 }				t_rgb;
 
-typedef struct s_point
+typedef struct s_vec3
 {
 	float	x;
 	float	y;
 	float	z;
-}				t_point;
+}				t_vec3;
 
 typedef struct s_ray
 {
-	t_point	origin;
-	t_point	direction;
+	t_vec3	origin;
+	t_vec3	direction;
 }				t_ray;
 
 typedef struct s_obj
 {
-	int		id;
-	float	light_range;
-	t_rgb	rgb;
-	t_point	pos;
-	t_point	vec;
-	float	fov;
-	float	diameter;
-	float	height;
+	int			id;
+	float		light_range;
+	t_rgb		rgb;
+	t_vec3	pos;
+	t_vec3	vec;
+	float		fov;
+	float		diameter;
+	float		height;
 }				t_obj;
 
 typedef struct s_main
@@ -131,16 +131,16 @@ int		create_trgb(int t, int r, int g, int b);
 
 /////////////////////////		vector.c		////////////////////////////////
 
-float	vec_length(t_point vec);
-t_point	make_unit_vector(t_point vec);
-t_point	vec_addition(t_point lhs, t_point rhs);
-t_point	vec_multiplication(t_point lhs, t_point rhs);
-t_point	vec_float_multi(float m, t_point vec);
+float	vec_length(t_vec3 vec);
+t_vec3	make_unit_vector(t_vec3 vec);
+t_vec3	vec_addition(t_vec3 lhs, t_vec3 rhs);
+t_vec3	vec_multiplication(t_vec3 lhs, t_vec3 rhs);
+t_vec3	vec_float_multi(float m, t_vec3 vec);
 
 /////////////////////////		vector2.c		////////////////////////////////
 
-t_point	new_vec(float x, float y, float z);
-float	dot(t_point lhs, t_point rhs);
-t_point	vec_minus(t_point lhs, t_point rhs);
+t_vec3	new_vec(float x, float y, float z);
+float	dot(t_vec3 lhs, t_vec3 rhs);
+t_vec3	vec_minus(t_vec3 lhs, t_vec3 rhs);
 
 #endif
