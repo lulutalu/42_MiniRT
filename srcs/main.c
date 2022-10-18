@@ -34,15 +34,19 @@ float	hit_sphere(t_point center, float radius, t_ray ray)
 t_point	color(t_ray ray)
 {
 	float	t;
+	float	d;
 	t_point	N;
+	t_point	hitPoint;
+	t_point	light;
 
-	t = hit_sphere(new_vec(0, 0, -1), 0.5, ray);
-	if (t > 0.0f)
-	{
-		N = make_unit_vector(vec_minus(vec_addition(vec_float_multi(t, ray.direction), ray.origin), new_vec(0, 0, -1)));
-		return (vec_float_multi(0.5f, new_vec(N.x + 1.0f, N.y + 1.0f, N.z + 1.0f)));
-	}
-	return (new_vec(1, 1, 1));
+	t = hit_sphere(new_vec(0, 0, 0), 0.5, ray);
+	if (t < 0.0f)
+		return (new_vec(0, 0, 0));
+	hitPoint = vec_addition(ray.origin, vec_float_multi(t, ray.direction));
+	N = make_unit_vector(hitPoint);
+	light = make_unit_vector(new_vec(-1, -1, -1));
+	d = fmax(dot(N, vec_float_multi(-1.0f, light)), 0.0f);
+	return (vec_float_multi(d, new_vec(0.1f, 0.7f, 1)));
 }
 
 int	movement(t_main *main)
@@ -55,7 +59,7 @@ int	movement(t_main *main)
 	lower_left = new_vec(-2.0, -1.0, -1.0);
 	horizontal = new_vec(4.0, 0.0, 0.0);
 	vertical = new_vec(0.0, 2.0, 0.0);
-	origin = new_vec(0.0, 0.0, 1.0);
+	origin = new_vec(0.0, 0.0, 2.0);
 
 	float	u;
 	float	v;
