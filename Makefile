@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/10/16 19:32:36 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/10/21 22:40:33 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,16 @@ SRCS_FILES		= main.c \
 				  colors.c \
 				  vector.c \
 				  vector2.c \
-					raytracing.c \
-
+				  raytracing.c \
+				  parsing.c \
+				  parsing_utils.c \
+				  check_args.c \
+				  clean.c \
+				  init.c \
+				  fill_obj_1.c \
+				  fill_obj_2.c \
+				  get.c \
+				  valid_char.c \
 ################################################################################
 
 OBJS			:= $(addprefix $(O_DIR), $(SRCS_FILES:.c=.o))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/16 22:06:50 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/21 22:53:19 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_mlx
 {
 	void		*ptr;
 	void		*window;
-	t_data	img;
+	t_data		img;
 	float		aspect_ratio;
 	int			x_res;
 	int			y_res;
@@ -77,9 +77,9 @@ typedef struct s_mlx
 
 typedef struct s_rgb
 {
-	int		red;
-	int		green;
-	int		blue;
+	int		r;
+	int		g;
+	int		b;
 }				t_rgb;
 
 typedef struct s_vec3
@@ -98,18 +98,27 @@ typedef struct s_ray
 typedef struct s_obj
 {
 	int			id;
-	float		light_range;
+	float		light_r;
 	t_rgb		rgb;
-	t_vec3	pos;
-	t_vec3	vec;
+	t_vec3		pos;
+	t_vec3		vec;
 	float		fov;
 	float		diameter;
 	float		height;
 }				t_obj;
 
+typedef struct s_scn
+{
+	t_obj	*obj;
+	int		n_obj;
+	int		a;
+	int		c;
+	int		l;
+}				t_scn;
+
 typedef struct s_main
 {
-	t_obj	obj; //remember to declare it as a pointer
+	t_scn	scn;
 	t_mlx	mlx;
 	float	aspect_ratio;
 }				t_main;
@@ -151,5 +160,56 @@ int		frame_loop(t_main *main);
 void	pixelColor(t_main *main, t_ray ray, int x, int y);
 float	hit_sphere(t_vec3 center, float radius, t_ray ray);
 t_ray	rayGeneration(t_main *main, int x, int y);
+
+///////////////////////		parcing.c	////////////////////////////////
+
+void	parse(int ac, char **av, t_main *m);
+
+///////////////////////		check_args.c	////////////////////////////////
+
+void	check_args(int ac, char **av, t_main *m);
+
+///////////////////////		clean.c	    ////////////////////////////////
+
+void	exit_error(char *str, t_main *m);
+void	perror_exit(char *s);
+
+///////////////////////		init.c	   ////////////////////////////////
+
+void	init_scn(t_scn *scn);
+void	init_obj(t_main *m);
+
+///////////////////////		parcing_utils.c	    ////////////////////////////////
+
+char	*trim_free(char *s, char *set);
+void	count_obj(char *f_path, t_main *m);
+int		check_size_tab(char **str, int nb);
+float	ft_atof(char *s);
+
+/////////////////////////		fill_obj_1.c		/////////////////////////
+
+void	fill_obj_a(char **info, t_main *m, int i);
+void	fill_obj_c(char **info, t_main *m, int i);
+void	fill_obj_l(char **info, t_main *m, int i);
+
+/////////////////////////		fill_obj_2.c		/////////////////////////
+
+void	fill_obj_sp(char **info, t_main *m, int i);
+void	fill_obj_pl(char **info, t_main *m, int i);
+void	fill_obj_cy(char **info, t_main *m, int i);
+
+/////////////////////////		get.c		/////////////////////////
+
+void	get_l_r(char *l_r, t_main *m, int i);
+void	get_rgb(char *rgb, t_main *m, int i);
+void	get_pos(char *coord, t_main *m, int i);
+void	get_vec(char *coord, t_main *m, int i);
+void	get_fov(char *fov, t_main *m, int i);
+
+/////////////////////////		valid_char.c		/////////////////////////
+
+int		valid_char(char *s);
+int		valid_char_fl(char *s);
+int		valid_char_rgb(char *s);
 
 #endif
