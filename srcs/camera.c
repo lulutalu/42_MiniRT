@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/21 21:11:41 by lduboulo         ###   ########.fr       */
+/*   Created: 2022/10/19 17:45:35 by lduboulo          #+#    #+#             */
+/*   Updated: 2022/10/21 22:35:56 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 
-int	main(void)
+void	camera_init(t_mlx *mlx, t_camera *cam)
 {
-	t_main	main;
+	float	h;
 
-	rt_init(&main.mlx);
-	camera_init(&main.mlx, &main.cam);
-	mlx_hook(main.mlx.window, 2, (1L << 13), keyhook, &main);
-//	mlx_loop_hook(main.mlx.ptr, movement, &main);
-	frame_loop(&main);
-	mlx_loop(main.mlx.ptr);
-	return (1);
+	cam->fov = 150;
+	h = tan(cam->fov);
+	cam->viewport_height = 2.0f * h;
+	cam->viewport_width = mlx->aspect_ratio * cam->viewport_height;
+	cam->pos = new_vec(0.0f, 0.0f, 0);
+	cam->dir = new_vec(0.0f, 0.0f, 1.0f);
+	cam->vup = new_vec(0, 1, 0);
+	//printf("View Height : %f\nView Width : %f\n", cam->viewport_height, cam->viewport_width);
 }

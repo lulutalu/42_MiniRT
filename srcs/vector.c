@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 22:55:48 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/16 19:48:49 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/21 21:25:11 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_vec3	make_unit_vector(t_vec3 vec)
 	t_vec3	newVec;
 	float	k;
 
-	k = 1 / vec_length(vec);
-	newVec.x = vec.x * k;
-	newVec.y = vec.y * k;
-	newVec.z = vec.z * k;
+	k = vec_length(vec);
+	newVec.x /= k;
+	newVec.y /= k;
+	newVec.z /= k;
 	return (newVec);
 }
 

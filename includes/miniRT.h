@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/16 22:06:50 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/21 22:35:56 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define SPHERE 0
 # define PLANE 1
 # define CYLINDER 2
+
+# define PI 3.142857
 
 /*
  * Structures
@@ -107,11 +109,21 @@ typedef struct s_obj
 	float		height;
 }				t_obj;
 
+typedef struct s_camera
+{
+	t_vec3	pos;
+	t_vec3	dir;
+	t_vec3	vup;
+	int		fov;
+	float	viewport_height;
+	float	viewport_width;
+}				t_camera;
+
 typedef struct s_main
 {
-	t_obj	obj; //remember to declare it as a pointer
-	t_mlx	mlx;
-	float	aspect_ratio;
+	t_obj		obj; //remember to declare it as a pointer
+	t_mlx		mlx;
+	t_camera	cam;
 }				t_main;
 
 /*
@@ -121,7 +133,7 @@ typedef struct s_main
 /////////////////////////		mlx_utils.c		////////////////////////////////
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		keyhook(int keycode, t_mlx *mlx);
+int		keyhook(int keycode, t_main *main);
 void	image_init(t_mlx *mlx);
 int		close_window(int keycode, t_mlx *mlx);
 void	rt_init(t_mlx *mlx);
@@ -144,6 +156,8 @@ t_vec3	vec_float_multi(float m, t_vec3 vec);
 t_vec3	new_vec(float x, float y, float z);
 float	dot(t_vec3 lhs, t_vec3 rhs);
 t_vec3	vec_minus(t_vec3 lhs, t_vec3 rhs);
+t_vec3	cross(t_vec3 lhs, t_vec3 rhs);
+t_vec3	vec_div(float div, t_vec3 vec);
 
 ///////////////////////		raytracing.c	////////////////////////////////
 
@@ -151,5 +165,9 @@ int		frame_loop(t_main *main);
 void	pixelColor(t_main *main, t_ray ray, int x, int y);
 float	hit_sphere(t_vec3 center, float radius, t_ray ray);
 t_ray	rayGeneration(t_main *main, int x, int y);
+
+///////////////////////			camera.c	////////////////////////////////
+
+void	camera_init(t_mlx *mlx, t_camera *cam);
 
 #endif
