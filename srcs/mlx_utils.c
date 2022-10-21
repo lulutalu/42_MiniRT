@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:36:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/21 22:35:55 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/21 23:22:56 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	keyhook(int keycode, t_main *main)
 {
-/*	if (keycode == RIGHT_ARROW)
-		mlx->x_start += 10;*/
+	if (keycode == RIGHT_ARROW)
+	{
+		main->cam.pos.z -= 1;
+		frame_loop(main);
+	}
 	if (keycode == LEFT_ARROW)
 	{
 		main->cam.pos.z += 1;
