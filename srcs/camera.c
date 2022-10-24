@@ -20,7 +20,7 @@ void	camera_init(t_mlx *mlx, t_camera *cam)
 	h = tan(cam->fov);
 	cam->viewport_height = 2.0f * h;
 	cam->viewport_width = mlx->aspect_ratio * cam->viewport_height;
-	cam->pos = new_vec(0.0f, 0.0f, 0);
-	cam->dir = new_vec(0.0f, 0.0f, 1.0f);
+	cam->pos = new_vec(0.0f, 0.0f, 3.0f);
+	cam->dir = make_unit_vector(new_vec(0.0f, -1.0f, -1.0f));
 	cam->vup = new_vec(0, 1, 0);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/miniRT.h"
 
-t_ray	rayGeneration(t_main *main, int x, int y)
+t_ray	ray_generation(t_main *main, int x, int y)
 {
 	t_ray	res;
 	float	u;
@@ -27,12 +27,12 @@ t_ray	rayGeneration(t_main *main, int x, int y)
 
 	t_vec3	tmp;
 
-	forward = make_unit_vector(vec_minus(main->cam.dir, main->cam.pos));
+	forward = make_unit_vector(vec_minus(main->cam.pos, main->cam.dir));
 	right = make_unit_vector(cross(new_vec(1.0f, 0.0f, 0.0f), forward));
 	up = cross(forward, right);
 	origin = main->cam.pos;
 
-	h = tan(90);
+	h = tan(120);
 	w = h * main->mlx.aspect_ratio;
 
 	u = (((float)x * 2.0f) / (float)main->mlx.x_res - 1.0f) * w;
@@ -52,26 +52,7 @@ t_ray	rayGeneration(t_main *main, int x, int y)
 	return (res);
 }
 
-float	hit_sphere(t_vec3 center, float radius, t_ray ray)
-{
-	t_vec3	oc;
-	float	a;
-	float	b;
-	float	c;
-	float	discri;
-
-	oc = vec_minus(ray.origin, center);
-	a = dot(ray.direction, ray.direction);
-	b = 2.0f * dot(oc, ray.direction);
-	c = dot(oc, oc) - (radius * radius);
-	discri = b * b - (4 * a * c);
-	if (discri < 0.0f)
-		return (-1.0f);
-	else
-		return ((-b - sqrtf(discri)) / (2.0f * a));
-}
-
-void	pixelColor(t_main *main, t_ray ray, int x, int y)
+void	pixel_color(t_main *main, t_ray ray, int x, int y)
 {
 	float	t;
 	float	d;
@@ -79,16 +60,28 @@ void	pixelColor(t_main *main, t_ray ray, int x, int y)
 	t_vec3	hitPoint;
 	t_vec3	light;
 
-	t = hit_sphere(new_vec(0.0f, 0.0f, -2.0f), 1.0f, ray);
+	t = hit_plane(new_vec(0.0f, 0.0f, -10.0f), make_unit_vector(new_vec(0.0f, 0.0f, 1.0f)), ray);
 	if (t < 0.0f)
-		putPixelColor(&main->mlx, x, y, new_vec(0.0f, 0.0f, 0.0f));
+		put_pixel_color(&main->mlx, x, y, new_vec(0.0f, 0.0f, 0.0f));
 	else
 	{
 		hitPoint = vec_addition(ray.origin, vec_float_multi(t, ray.direction));
 		N = make_unit_vector(hitPoint);
-		light = make_unit_vector(new_vec(-0.5f, 5.0f, -2.0f));
-		d = fmax(dot(N, light), 0.0f);
-		putPixelColor(&main->mlx, x, y, vec_float_multi(d, new_vec(0.0f, 0.0f, 1.0f)));
+		light = make_unit_vector(new_vec(0.0f, 4.0f, 0.0f));
+		d = fmax(dot(N, light), 0.2f);
+		put_pixel_color(&main->mlx, x, y, vec_float_multi(d, new_vec(0.0f, 0.0f, 1.0f)));
+	}
+
+	t = hit_plane(new_vec(0.0f, 20.0f, 0.0f), make_unit_vector(new_vec(0.0f, -1.0f, 0.0f)), ray);
+	if (t < 0.0f)
+		put_pixel_color(&main->mlx, x, y, new_vec(0.0f, 0.0f, 0.0f));
+	else
+	{
+		hitPoint = vec_addition(ray.origin, vec_float_multi(t, ray.direction));
+		N = make_unit_vector(hitPoint);
+		light = make_unit_vector(new_vec(0.0f, 4.0f, 0.0f));
+		d = fmax(dot(N, light), 0.2f);
+		put_pixel_color(&main->mlx, x, y, vec_float_multi(d, new_vec(0.0f, 0.0f, 1.0f)));
 	}
 }
 
@@ -98,14 +91,14 @@ int	frame_loop(t_main *main)
 	int	y;
 
 	image_init(&main->mlx);
-	printf("%f\n", main->cam.pos.z);
+	printf("%f\n", main->cam.dir.x);
 	y = 0;
 	while (y < main->mlx.y_res)
 	{
 		x = 0;
 		while (x < main->mlx.x_res)
 		{
-			pixelColor(main, rayGeneration(main, x, y), x, y);
+			pixel_color(main, ray_generation(main, x, y), x, y);
 			x++;
 		}
 		y++;

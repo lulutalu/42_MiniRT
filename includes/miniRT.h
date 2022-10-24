@@ -141,7 +141,7 @@ void	rt_init(t_mlx *mlx);
 /////////////////////////		colors.c		////////////////////////////////
 
 int		create_trgb(int t, int r, int g, int b);
-void	putPixelColor(t_mlx *mlx, int x, int y, t_vec3 rgb);
+void	put_pixel_color(t_mlx *mlx, int x, int y, t_vec3 rgb);
 
 /////////////////////////		vector.c		////////////////////////////////
 
@@ -162,12 +162,17 @@ t_vec3	vec_div(float div, t_vec3 vec);
 ///////////////////////		raytracing.c	////////////////////////////////
 
 int		frame_loop(t_main *main);
-void	pixelColor(t_main *main, t_ray ray, int x, int y);
+void	pixel_color(t_main *main, t_ray ray, int x, int y);
 float	hit_sphere(t_vec3 center, float radius, t_ray ray);
-t_ray	rayGeneration(t_main *main, int x, int y);
+t_ray	ray_generation(t_main *main, int x, int y);
 
 ///////////////////////			camera.c	////////////////////////////////
 
 void	camera_init(t_mlx *mlx, t_camera *cam);
+
+///////////////////////		intersection.c	////////////////////////////////
+
+float	hit_sphere(t_vec3 center, float radius, t_ray ray);
+float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
 
 #endif

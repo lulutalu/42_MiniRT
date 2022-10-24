@@ -36,6 +36,7 @@ SRCS_FILES		= main.c \
 				  vector2.c \
 				  raytracing.c \
 				  camera.c \
+					intersection.c \
 
 ################################################################################
 
