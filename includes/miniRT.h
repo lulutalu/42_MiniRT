@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/21 23:22:59 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:29:53 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,18 @@ typedef struct s_mlx
 {
 	void		*ptr;
 	void		*window;
-	t_data	img;
+	t_data		img;
 	float		aspect_ratio;
 	int			x_res;
 	int			y_res;
 }							t_mlx;
 
-typedef struct s_rgb
+/*typedef struct s_rgb
 {
-	int		red;
-	int		green;
-	int		blue;
-}				t_rgb;
+	int		r;
+	int		g;
+	int		b;
+}				t_rgb;*/
 
 typedef struct s_vec3
 {
@@ -95,16 +95,17 @@ typedef struct s_ray
 {
 	t_vec3	origin;
 	t_vec3	direction;
+	int		closest_obj;
+	float	t;
 }				t_ray;
 
 typedef struct s_obj
 {
 	int			id;
-	float		light_range;
-	t_rgb		rgb;
-	t_vec3	pos;
-	t_vec3	vec;
-	float		fov;
+	float		light_r;
+	t_vec3		rgb;
+	t_vec3		pos;
+	t_vec3		vec;
 	float		diameter;
 	float		height;
 }				t_obj;
@@ -113,17 +114,28 @@ typedef struct s_camera
 {
 	t_vec3	pos;
 	t_vec3	dir;
-	t_vec3	vup;
 	int		fov;
-	float	viewport_height;
-	float	viewport_width;
+	t_vec3	forward;
+	t_vec3	right;
+	t_vec3	up;
+	float	h;
+	float	w;
 }				t_camera;
+
+typedef struct s_scn
+{
+	t_obj	*obj;
+	int		n_obj;
+	int		a;
+	int		c;
+	int		l;
+}				t_scn;
 
 typedef struct s_main
 {
-	t_obj		obj; //remember to declare it as a pointer
 	t_mlx		mlx;
 	t_camera	cam;
+	t_scn		scn;
 }				t_main;
 
 /*
@@ -159,11 +171,15 @@ t_vec3	vec_minus(t_vec3 lhs, t_vec3 rhs);
 t_vec3	cross(t_vec3 lhs, t_vec3 rhs);
 t_vec3	vec_div(float div, t_vec3 vec);
 
+/////////////////////////		vector3.c		////////////////////////////////
+
+bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
+
 ///////////////////////		raytracing.c	////////////////////////////////
 
 int		frame_loop(t_main *main);
 void	pixel_color(t_main *main, t_ray ray, int x, int y);
-float	hit_sphere(t_vec3 center, float radius, t_ray ray);
+float	shadow_value(t_ray ray, t_vec3 l_pos);
 t_ray	ray_generation(t_main *main, int x, int y);
 
 ///////////////////////			camera.c	////////////////////////////////
@@ -174,5 +190,6 @@ void	camera_init(t_mlx *mlx, t_camera *cam);
 
 float	hit_sphere(t_vec3 center, float radius, t_ray ray);
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
+void	check_intersection(t_obj obj, int i, t_ray *ray);
 
 #endif

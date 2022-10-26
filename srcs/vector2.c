@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 19:27:32 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/20 20:00:46 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:31:05 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ t_vec3	cross(t_vec3 lhs, t_vec3 rhs)
 
 t_vec3	vec_div(float div, t_vec3 vec)
 {
-	vec.x /= div;
-	vec.y /= div;
-	vec.z /= div;
+	float	k;
+
+	k = 1.0f / div;
+	vec.x *= k;
+	vec.y *= k;
+	vec.z *= k;
 	return (vec);
 }

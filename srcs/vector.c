@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 22:55:48 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/21 22:50:55 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:10:37 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ float	vec_length(t_vec3 vec)
 
 t_vec3	make_unit_vector(t_vec3 vec)
 {
-	t_vec3	newVec;
+	t_vec3	new_vec;
 	float	k;
 
 	k = 1.0f / vec_length(vec);
-	newVec.x = vec.x * k;
-	newVec.y = vec.y * k;
-	newVec.z = vec.z * k;
-	return (newVec);
+	new_vec.x = vec.x * k;
+	new_vec.y = vec.y * k;
+	new_vec.z = vec.z * k;
+	return (new_vec);
 }
 
 t_vec3	vec_addition(t_vec3 lhs, t_vec3 rhs)
@@ -44,7 +44,7 @@ t_vec3	vec_addition(t_vec3 lhs, t_vec3 rhs)
 
 t_vec3	vec_multiplication(t_vec3 lhs, t_vec3 rhs)
 {
-	t_vec3 res;
+	t_vec3	res;
 
 	res.x = rhs.x * lhs.x;
 	res.y = rhs.y * lhs.y;

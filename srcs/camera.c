@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:45:35 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/21 23:22:58 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:23:55 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	camera_init(t_mlx *mlx, t_camera *cam)
 {
-	float	h;
-
-	cam->fov = 150;
-	h = tan(cam->fov);
-	cam->viewport_height = 2.0f * h;
-	cam->viewport_width = mlx->aspect_ratio * cam->viewport_height;
-	cam->pos = new_vec(0.0f, 0.0f, 3.0f);
-	cam->dir = make_unit_vector(new_vec(0.0f, -1.0f, -1.0f));
-	cam->vup = new_vec(0, 1, 0);
+	cam->fov = 120;
+	cam->pos = new_vec(0.0f, 0.0f, 0.0f);
+	cam->dir = new_vec(0.0f, 0.0f, -1.0f);
+	cam->forward = make_unit_vector(cam->dir);
+	cam->right = cross(new_vec(0.0f, 1.0f, 0.0f), cam->forward);
+	cam->right = make_unit_vector(cam->right);
+	cam->up = cross(cam->forward, cam->right);
+	cam->w = tan(cam->fov);
+	cam->h = cam->w * mlx->aspect_ratio;
 }

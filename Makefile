@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/10/20 18:11:52 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/10/26 16:42:51 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS_FILES		= main.c \
 				  colors.c \
 				  vector.c \
 				  vector2.c \
+				  vector3.c \
 				  raytracing.c \
 				  camera.c \
 					intersection.c \
@@ -58,7 +59,7 @@ MKDIR			= mkdir -p
 RM				= rm -rf
 
 
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address
 MLXFLAGS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 
