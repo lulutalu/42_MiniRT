@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/26 17:29:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:40:20 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	pixel_color(t_main *main, t_ray ray, int x, int y)
 	}
 	if (ray.closest_obj > -1)
 	{
-		l = shadow_value(ray, new_vec(0.0f, 0.0f, -1.0f));
+		l = shadow_value(ray, new_vec(0.0f, -1.0f, -0.3f));
 		rgb = vec_float_multi(l, main->scn.obj[ray.closest_obj].rgb);
 		put_pixel_color(&main->mlx, x, y, rgb);
 	}

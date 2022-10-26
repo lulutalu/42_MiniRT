@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/26 17:29:52 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:40:19 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ void	scene_init(t_scn *scn)
 
 	scn->obj[0].id = PLANE;
 	scn->obj[0].rgb = new_vec(1.0f, 0.0f, 0.0f);
-	scn->obj[0].pos = new_vec(0.0f, 0.0f, -20.0f);
+	scn->obj[0].pos = new_vec(0.0f, 0.0f, -50.0f);
 	scn->obj[0].vec = new_vec(0.0f, 0.0f, 1.0f);
 
 	scn->obj[1].id = SPHERE;
 	scn->obj[1].rgb = new_vec(0.0f, 1.0f, 0.0f);
-	scn->obj[1].pos = new_vec(2.0f, 0.0f, -10.0f);
-	scn->obj[1].diameter = 2.0f;
+	scn->obj[1].pos = new_vec(4.0f, 0.0f, -10.0f);
+	scn->obj[1].diameter = 5.0f;
 
 	scn->obj[2].id = SPHERE;
 	scn->obj[2].rgb = new_vec(0.0f, 0.0f, 1.0f);
-	scn->obj[2].pos = new_vec(-2.0f, 0.0f, -10.0f);
-	scn->obj[2].diameter = 2.0f;
+	scn->obj[2].pos = new_vec(-4.0f, 0.0f, -10.0f);
+	scn->obj[2].diameter = 5.0f;
 
-	scn->obj[0].id = PLANE;
-	scn->obj[0].rgb = new_vec(1.0f, 1.0f, 0.0f);
-	scn->obj[0].pos = new_vec(0.0f, -20.0f, 0.0f);
-	scn->obj[0].vec = new_vec(0.0f, -1.0f, 0.0f);
+	scn->obj[3].id = PLANE;
+	scn->obj[3].rgb = new_vec(1.0f, 1.0f, 0.0f);
+	scn->obj[3].pos = new_vec(0.0f, -8.0f, 0.0f);
+	scn->obj[3].vec = new_vec(0.0f, 1.0f, 0.0f);
 }
 
 int	main(void)
