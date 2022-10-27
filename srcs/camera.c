@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:45:35 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/26 17:40:21 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:51:53 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	camera_init(t_mlx *mlx, t_camera *cam)
 	cam->right = cross(new_vec(0.0f, 1.0f, 0.0f), cam->forward);
 	cam->right = make_unit_vector(cam->right);
 	cam->up = cross(cam->forward, cam->right);
-	cam->w = fabs(tan(cam->fov));
+	cam->w = (float)fabs(tan(cam->fov));
 	cam->h = cam->w * mlx->aspect_ratio;
 }

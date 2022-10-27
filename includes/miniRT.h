@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/26 17:29:53 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:48:26 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
 
 int		frame_loop(t_main *main);
 void	pixel_color(t_main *main, t_ray ray, int x, int y);
-float	shadow_value(t_ray ray, t_vec3 l_pos);
+float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn);
 t_ray	ray_generation(t_main *main, int x, int y);
 
 ///////////////////////			camera.c	////////////////////////////////
@@ -191,5 +191,6 @@ void	camera_init(t_mlx *mlx, t_camera *cam);
 float	hit_sphere(t_vec3 center, float radius, t_ray ray);
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
 void	check_intersection(t_obj obj, int i, t_ray *ray);
+void	check_shadow_intersection(t_obj obj, int i, t_ray *ray);
 
 #endif

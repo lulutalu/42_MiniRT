@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/26 16:23:53 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:48:24 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ float	hit_sphere(t_vec3 center, float radius, t_ray ray)
 	if (discri < 0.0f)
 		return (-1.0f);
 	else
-		return ((-b - sqrtf(discri)) / (2.0f * a));
+		return (fminf((-b - sqrtf(discri)) / (2.0f * a), (-b + sqrtf(discri)) / (2.0f * a)));
 }
 
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray)
@@ -59,6 +59,30 @@ void	check_intersection(t_obj obj, int i, t_ray *ray)
 	else if (obj.id == PLANE)
 		t_obj = hit_plane(obj.pos, obj.vec, *ray);
 	if (t_obj > 0.0f)
+	{
+		if (ray->closest_obj == -1)
+		{
+			ray->closest_obj = i;
+			ray->t = t_obj;
+		}
+		else if (t_obj < ray->t)
+		{
+			ray->closest_obj = i;
+			ray->t = t_obj;
+		}
+	}
+}
+
+void	check_shadow_intersection(t_obj obj, int i, t_ray *ray)
+{
+	float	t_obj;
+
+	t_obj = -1.0f;
+	if (obj.id == SPHERE)
+		t_obj = hit_sphere(obj.pos, (obj.diameter * 0.5f), *ray);
+	else if (obj.id == PLANE)
+		t_obj = hit_plane(obj.pos, obj.vec, *ray);
+	if (t_obj > 0.01f)
 	{
 		if (ray->closest_obj == -1)
 		{

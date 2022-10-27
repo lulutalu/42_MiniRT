@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:36:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/26 17:40:20 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:51:02 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	close_window(int keycode, t_mlx *mlx)
 void	rt_init(t_mlx *mlx)
 {
 	mlx->ptr = mlx_init();
-	mlx->aspect_ratio = 16.0f / 10.0f;
-	mlx->x_res = 1800;
+	mlx->aspect_ratio = 16.0f / 9.0f;
+	mlx->x_res = 1920;
 	mlx->y_res = mlx->x_res / (int)roundf(mlx->aspect_ratio);
 	mlx->window = mlx_new_window(mlx->ptr, mlx->x_res, mlx->y_res, "Mini RT");
 	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
