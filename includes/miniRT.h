@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/21 22:53:19 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:48:26 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define PLANE 1
 # define CYLINDER 2
 
+# define PI 3.142857
+
 /*
  * Structures
 */
@@ -75,12 +77,12 @@ typedef struct s_mlx
 	int			y_res;
 }							t_mlx;
 
-typedef struct s_rgb
+/*typedef struct s_rgb
 {
 	int		r;
 	int		g;
 	int		b;
-}				t_rgb;
+}				t_rgb;*/
 
 typedef struct s_vec3
 {
@@ -93,19 +95,33 @@ typedef struct s_ray
 {
 	t_vec3	origin;
 	t_vec3	direction;
+	int		closest_obj;
+	float	t;
 }				t_ray;
 
 typedef struct s_obj
 {
 	int			id;
 	float		light_r;
-	t_rgb		rgb;
+	t_vec3		rgb;
 	t_vec3		pos;
 	t_vec3		vec;
 	float		fov;
 	float		diameter;
 	float		height;
 }				t_obj;
+
+typedef struct s_camera
+{
+	t_vec3	pos;
+	t_vec3	dir;
+	int		fov;
+	t_vec3	forward;
+	t_vec3	right;
+	t_vec3	up;
+	float	h;
+	float	w;
+}				t_camera;
 
 typedef struct s_scn
 {
@@ -118,8 +134,9 @@ typedef struct s_scn
 
 typedef struct s_main
 {
-	t_scn	scn;
-	t_mlx	mlx;
+	t_mlx		mlx;
+	t_camera	cam;
+	t_scn		scn;
 	float	aspect_ratio;
 }				t_main;
 
@@ -130,7 +147,7 @@ typedef struct s_main
 /////////////////////////		mlx_utils.c		////////////////////////////////
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		keyhook(int keycode, t_mlx *mlx);
+int		keyhook(int keycode, t_main *main);
 void	image_init(t_mlx *mlx);
 int		close_window(int keycode, t_mlx *mlx);
 void	rt_init(t_mlx *mlx);
@@ -138,7 +155,7 @@ void	rt_init(t_mlx *mlx);
 /////////////////////////		colors.c		////////////////////////////////
 
 int		create_trgb(int t, int r, int g, int b);
-void	putPixelColor(t_mlx *mlx, int x, int y, t_vec3 rgb);
+void	put_pixel_color(t_mlx *mlx, int x, int y, t_vec3 rgb);
 
 /////////////////////////		vector.c		////////////////////////////////
 
@@ -153,13 +170,30 @@ t_vec3	vec_float_multi(float m, t_vec3 vec);
 t_vec3	new_vec(float x, float y, float z);
 float	dot(t_vec3 lhs, t_vec3 rhs);
 t_vec3	vec_minus(t_vec3 lhs, t_vec3 rhs);
+t_vec3	cross(t_vec3 lhs, t_vec3 rhs);
+t_vec3	vec_div(float div, t_vec3 vec);
+
+/////////////////////////		vector3.c		////////////////////////////////
+
+bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
 
 ///////////////////////		raytracing.c	////////////////////////////////
 
 int		frame_loop(t_main *main);
-void	pixelColor(t_main *main, t_ray ray, int x, int y);
+void	pixel_color(t_main *main, t_ray ray, int x, int y);
+float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn);
+t_ray	ray_generation(t_main *main, int x, int y);
+
+///////////////////////			camera.c	////////////////////////////////
+
+void	camera_init(t_mlx *mlx, t_camera *cam);
+
+///////////////////////		intersection.c	////////////////////////////////
+
 float	hit_sphere(t_vec3 center, float radius, t_ray ray);
-t_ray	rayGeneration(t_main *main, int x, int y);
+float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
+void	check_intersection(t_obj obj, int i, t_ray *ray);
+void	check_shadow_intersection(t_obj obj, int i, t_ray *ray);
 
 ///////////////////////		parcing.c	////////////////////////////////
 

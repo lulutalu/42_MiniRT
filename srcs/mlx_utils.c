@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:36:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/16 19:33:35 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:51:02 by lduboulo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,31 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-int	keyhook(int keycode, t_mlx *mlx)
+int	keyhook(int keycode, t_main *main)
 {
-/*	if (keycode == RIGHT_ARROW)
-		mlx->x_start += 10;
+	if (keycode == RIGHT_ARROW)
+	{
+		main->cam.dir.y += 0.4f;
+		frame_loop(main);
+	}
 	if (keycode == LEFT_ARROW)
-		mlx->x_start -= 10;
+	{
+		main->cam.dir.y -= 0.4f;
+		frame_loop(main);
+	}
 	if (keycode == UP_ARROW)
-		mlx->y_start -= 10;
+	{
+		main->cam.pos.z -= 0.2f;
+		frame_loop(main);
+	}
 	if (keycode == DOWN_ARROW)
-		mlx->y_start += 10;*/
+	{
+		main->cam.pos.z += 0.2f;
+		frame_loop(main);
+	}
 	if (keycode == ESC)
 	{
-		mlx_destroy_window(mlx->ptr, mlx->window);
+		mlx_destroy_window(main->mlx.ptr, main->mlx.window);
 		exit(EXIT_SUCCESS);
 	}
 	return (1);
@@ -55,9 +67,9 @@ int	close_window(int keycode, t_mlx *mlx)
 void	rt_init(t_mlx *mlx)
 {
 	mlx->ptr = mlx_init();
-	mlx->aspect_ratio = 16.0f / 10.0f;
-	mlx->x_res = 1000;
-	mlx->y_res = mlx->x_res / (int)mlx->aspect_ratio;
+	mlx->aspect_ratio = 16.0f / 9.0f;
+	mlx->x_res = 1920;
+	mlx->y_res = mlx->x_res / (int)roundf(mlx->aspect_ratio);
 	mlx->window = mlx_new_window(mlx->ptr, mlx->x_res, mlx->y_res, "Mini RT");
 	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
 	mlx_do_key_autorepeaton(mlx->ptr);

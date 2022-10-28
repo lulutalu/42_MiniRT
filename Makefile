@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lduboulo && lzima				            +#+  +:+       +#+         #
+#    By: lduboulo && lzima				                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/10/21 22:40:33 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/10/26 16:42:51 by lduboulo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,10 @@ SRCS_FILES		= main.c \
 				  colors.c \
 				  vector.c \
 				  vector2.c \
+				  vector3.c \
 				  raytracing.c \
+				  camera.c \
+					intersection.c \
 				  parsing.c \
 				  parsing_utils.c \
 				  check_args.c \
@@ -64,7 +67,7 @@ MKDIR			= mkdir -p
 RM				= rm -rf
 
 
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address
 MLXFLAGS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 
