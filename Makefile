@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lduboulo && lzima				            +#+  +:+       +#+         #
+#    By: lduboulo && lzima				                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
 #    Updated: 2022/10/26 16:42:51 by lduboulo         ###   ########.fr        #
@@ -38,7 +38,15 @@ SRCS_FILES		= main.c \
 				  raytracing.c \
 				  camera.c \
 					intersection.c \
-
+				  parsing.c \
+				  parsing_utils.c \
+				  check_args.c \
+				  clean.c \
+				  init.c \
+				  fill_obj_1.c \
+				  fill_obj_2.c \
+				  get.c \
+				  valid_char.c \
 ################################################################################
 
 OBJS			:= $(addprefix $(O_DIR), $(SRCS_FILES:.c=.o))

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
 /*   Updated: 2022/10/27 18:48:26 by lduboulo         ###   ########.fr       */
@@ -106,6 +106,7 @@ typedef struct s_obj
 	t_vec3		rgb;
 	t_vec3		pos;
 	t_vec3		vec;
+	float		fov;
 	float		diameter;
 	float		height;
 }				t_obj;
@@ -136,6 +137,7 @@ typedef struct s_main
 	t_mlx		mlx;
 	t_camera	cam;
 	t_scn		scn;
+	float	aspect_ratio;
 }				t_main;
 
 /*
@@ -192,5 +194,56 @@ float	hit_sphere(t_vec3 center, float radius, t_ray ray);
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
 void	check_intersection(t_obj obj, int i, t_ray *ray);
 void	check_shadow_intersection(t_obj obj, int i, t_ray *ray);
+
+///////////////////////		parcing.c	////////////////////////////////
+
+void	parse(int ac, char **av, t_main *m);
+
+///////////////////////		check_args.c	////////////////////////////////
+
+void	check_args(int ac, char **av, t_main *m);
+
+///////////////////////		clean.c	    ////////////////////////////////
+
+void	exit_error(char *str, t_main *m);
+void	perror_exit(char *s);
+
+///////////////////////		init.c	   ////////////////////////////////
+
+void	init_scn(t_scn *scn);
+void	init_obj(t_main *m);
+
+///////////////////////		parcing_utils.c	    ////////////////////////////////
+
+char	*trim_free(char *s, char *set);
+void	count_obj(char *f_path, t_main *m);
+int		check_size_tab(char **str, int nb);
+float	ft_atof(char *s);
+
+/////////////////////////		fill_obj_1.c		/////////////////////////
+
+void	fill_obj_a(char **info, t_main *m, int i);
+void	fill_obj_c(char **info, t_main *m, int i);
+void	fill_obj_l(char **info, t_main *m, int i);
+
+/////////////////////////		fill_obj_2.c		/////////////////////////
+
+void	fill_obj_sp(char **info, t_main *m, int i);
+void	fill_obj_pl(char **info, t_main *m, int i);
+void	fill_obj_cy(char **info, t_main *m, int i);
+
+/////////////////////////		get.c		/////////////////////////
+
+void	get_l_r(char *l_r, t_main *m, int i);
+void	get_rgb(char *rgb, t_main *m, int i);
+void	get_pos(char *coord, t_main *m, int i);
+void	get_vec(char *coord, t_main *m, int i);
+void	get_fov(char *fov, t_main *m, int i);
+
+/////////////////////////		valid_char.c		/////////////////////////
+
+int		valid_char(char *s);
+int		valid_char_fl(char *s);
+int		valid_char_rgb(char *s);
 
 #endif
