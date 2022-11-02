@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:26:40 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/10/21 23:42:22 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:36:24 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	get_rgb(char *rgb, t_main *m, int i)
 			exit_error("RGB : Invalid input : range\n", m);
 		j++;
 	}
-	m->scn.obj[i].rgb.r = ft_atof(split[0]);
-	m->scn.obj[i].rgb.g = ft_atof(split[1]);
-	m->scn.obj[i].rgb.b = ft_atof(split[2]);
+	m->scn.obj[i].rgb.x = ft_atof(split[0]);
+	m->scn.obj[i].rgb.y = ft_atof(split[1]);
+	m->scn.obj[i].rgb.z = ft_atof(split[2]);
 	free(split);
 }
 

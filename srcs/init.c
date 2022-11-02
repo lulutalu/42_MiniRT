@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:19:45 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/10/21 23:19:36 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:18:34 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	init_obj(t_main *m)
 	{
 		m->scn.obj[i].id = 0;
 		m->scn.obj[i].light_r = 0;
-		m->scn.obj[i].rgb.r = 0;
-		m->scn.obj[i].rgb.g = 0;
-		m->scn.obj[i].rgb.b = 0;
+		m->scn.obj[i].rgb.x = 0;
+		m->scn.obj[i].rgb.y = 0;
+		m->scn.obj[i].rgb.z = 0;
 		m->scn.obj[i].pos.x = 0;
 		m->scn.obj[i].pos.y = 0;
 		m->scn.obj[i].pos.z = 0;

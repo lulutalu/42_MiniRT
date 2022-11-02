@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/27 18:51:40 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:18:09 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	scene_init(t_scn *scn)
 
 int	main(int ac, char **av)
 {
-	t_main	m;
-	int		i;
+	t_main	main;
+//	int		i;
 
 	rt_init(&main.mlx);
-  parse(ac, av, &m);
+	parse(ac, av, &main);
 	camera_init(&main.mlx, &main.cam);
 	scene_init(&main.scn);
 	mlx_hook(main.mlx.window, 2, (1L << 13), keyhook, &main);
