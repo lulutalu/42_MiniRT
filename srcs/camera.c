@@ -3,20 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:45:35 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/02 16:30:28 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:57:19 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 
-void	camera_init(t_mlx *mlx, t_camera *cam)
+t_obj	*find_in_tab(t_scn *scn, int id)
 {
-	cam->fov = 120;
-	cam->pos = new_vec(0.0f, 0.0f, 0.0f);
-	cam->dir = new_vec(0.0f, 0.0f, -1.0f);
+	int	i;
+
+	i = 0;
+	while (i < scn->n_obj)
+	{
+		if (scn->obj[i].id == id)
+			break ;
+		i++;
+	}
+	return (&scn->obj[i]);
+}
+
+void	camera_init(t_mlx *mlx, t_camera *cam, t_scn *scn)
+{
+	t_obj	*cam_info;
+
+	cam_info = find_in_tab(scn, 'C');
+	cam->fov = cam_info->fov;
+	cam->pos = cam_info->pos;
+	cam->dir = cam_info->vec;
 	cam->forward = make_unit_vector(cam->dir);
 	cam->right = cross(new_vec(0.0f, 1.0f, 0.0f), cam->forward);
 	cam->right = make_unit_vector(cam->right);

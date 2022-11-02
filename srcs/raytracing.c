@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/27 18:50:44 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:57:13 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn)
 		coeff = dot(normal, shadow.direction);
 		if (coeff < 0.0f && scn.obj[ray.closest_obj].id == PLANE)
 			coeff *= -1.0f;
-		coeff *= 0.8f;
+		coeff *= find_in_tab(&scn, 'L')->light_r;
 	}
 	else
-		coeff = 0.1f;
-	if (coeff < 0.1f)
-		coeff = 0.1f;
+		coeff =  find_in_tab(&scn, 'A')->light_r;
+	if (coeff < find_in_tab(&scn, 'A')->light_r)
+		coeff = find_in_tab(&scn, 'A')->light_r;
 	return (coeff);
 }
 
@@ -74,7 +74,7 @@ void	pixel_color(t_main *main, t_ray ray, int x, int y)
 	float	l;
 	int		i;
 
-	light_pos = new_vec(0.0f, 30.0f, 20.0f);
+	light_pos = find_in_tab(&main->scn, 'L')->pos;
 	i = 0;
 	ray.closest_obj = -1;
 	while (i < main->scn.n_obj)

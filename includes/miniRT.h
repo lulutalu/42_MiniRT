@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/27 18:48:26 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:57:26 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_main
 	t_mlx		mlx;
 	t_camera	cam;
 	t_scn		scn;
-	float	aspect_ratio;
+	float		aspect_ratio;
 }				t_main;
 
 /*
@@ -181,12 +181,13 @@ bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
 
 int		frame_loop(t_main *main);
 void	pixel_color(t_main *main, t_ray ray, int x, int y);
-float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn);
+float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scnene);
 t_ray	ray_generation(t_main *main, int x, int y);
 
 ///////////////////////			camera.c	////////////////////////////////
 
-void	camera_init(t_mlx *mlx, t_camera *cam);
+void	camera_init(t_mlx *mlx, t_camera *cam, t_scn *scn);
+t_obj	*find_in_tab(t_scn *scn, int id);
 
 ///////////////////////		intersection.c	////////////////////////////////
 

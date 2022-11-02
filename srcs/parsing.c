@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:57:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/10/21 23:15:27 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:57:22 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	fill_obj_tab(char **info, t_main *m)
 	else if (!ft_strncmp(info[0], "cy", 2) && ft_strlen(info[0]) == 2)
 		fill_obj_cy(info, m, i);
 	else
+	{
+		printf("(%s)\n", info[0]);
 		exit_error("Invalid input : ID\n", m);
+	}
 }
 
 void	get_scn(char *f_path, t_main *m)

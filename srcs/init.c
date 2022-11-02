@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:19:45 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/11/02 16:18:34 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/02 21:47:30 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_obj(t_main *m)
 	m->scn.obj = ft_calloc(m->scn.n_obj + 1, sizeof(t_obj));
 	while (++i < m->scn.n_obj)
 	{
-		m->scn.obj[i].id = 0;
+		m->scn.obj[i].id = -1;
 		m->scn.obj[i].light_r = 0;
 		m->scn.obj[i].rgb.x = 0;
 		m->scn.obj[i].rgb.y = 0;

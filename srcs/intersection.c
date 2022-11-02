@@ -6,7 +6,7 @@
 /*   By: lduboulo <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/10/27 18:48:24 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:44:27 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_intersection(t_obj obj, int i, t_ray *ray)
 
 	t_obj = -1.0f;
 	if (obj.id == SPHERE)
-		t_obj = hit_sphere(obj.pos, (obj.diameter * 0.5f), *ray);
+		t_obj = hit_sphere(obj.pos, (obj.diameter * 0.5f), * ray);
 	else if (obj.id == PLANE)
 		t_obj = hit_plane(obj.pos, obj.vec, *ray);
 	if (t_obj > 0.0f)
