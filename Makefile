@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/10/26 16:42:51 by lduboulo         ###   ########.fr        #
+#    Updated: 2022/11/02 20:09:08 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ MKDIR			= mkdir -p
 RM				= rm -rf
 
 
-CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
 MLXFLAGS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 
