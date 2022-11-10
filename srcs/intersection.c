@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/08 22:47:18 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:57:05 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
 	t = hit_plane(pos, dir, ray);
 	if (t == -1.0f)
 		return (-1.0f);
-	p_inters = vec_addition(dir, vec_float_multi(t, ray.direction));
+	p_inters = vec_addition(ray.origin, vec_float_multi(t, ray.direction));
 	dist = vec_minus(pos, p_inters);
 	d2 = dot(dist, dist);
 	t = sqrtf(d2);
 	if (t <= radius)
 		return (t);
-	//printf("des fois ca hit pas\n");
 	return (-1.0f);
 }
 
