@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/10 19:57:05 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:09:34 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
 	d2 = dot(dist, dist);
 	t = sqrtf(d2);
 	if (t <= radius)
+	{
+		
 		return (t);
+	}
 	return (-1.0f);
 }
 
