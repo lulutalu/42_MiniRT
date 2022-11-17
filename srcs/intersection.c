@@ -6,11 +6,30 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/10 20:09:34 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:22:44 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
+
+float	hit_cylinder(t_vec3 pos, t_vec3 dir, t_obj obj, t_ray ray)
+{
+	float	t;
+	float	a;
+	float	b;
+	float	c;
+	float	discri;
+
+	a = sqrtf(dir.x) + sqrtf(dir.y);
+	b = 2 * ((ray.origin.x * dir.x) + (ray.origin.y * dir.y));
+	c = sqrtf(ray.origin.x) + sqrtf(ray.origin.y) - sqrtf(obj.diameter * 0.5f);
+	discri = b * b - (4 * a * c);
+	t = fminf((-b - sqrtf(discri)) / (2.0f * a), (-b + sqrtf(discri)) / (2.0f * a));
+	if (fabs(ray.origin.z + discri * dir.z) <= obj.height && discri < 0.0f && discri > 1.0f)
+		return (t);
+	else
+		return (-1.0f);
+}
 
 float	hit_sphere(t_vec3 center, float radius, t_ray ray)
 {
@@ -49,7 +68,7 @@ float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray)
 	return (-1.0f);
 }
 
-float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
+/*float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
 {
 	float	t;
 	t_vec3	p_inters;
@@ -69,7 +88,7 @@ float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
 		return (t);
 	}
 	return (-1.0f);
-}
+}*/
 
 void	check_intersection(t_obj obj, int i, t_ray *ray)
 {
@@ -81,7 +100,7 @@ void	check_intersection(t_obj obj, int i, t_ray *ray)
 	else if (obj.id == PLANE)
 		t_obj = hit_plane(obj.pos, obj.vec, *ray);
 	else if (obj.id == CYLINDER)
-		t_obj = hit_cylinder(obj.pos, obj.vec, (obj.diameter * 0.5f), *ray);
+		t_obj = hit_cylinder(obj.pos, obj.vec, obj, *ray);
 	if (t_obj > 0.0f)
 	{
 		if (ray->closest_obj == -1)
