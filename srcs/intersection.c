@@ -52,6 +52,45 @@ float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray)
 
 float	hit_cylinder(t_obj obj, t_ray ray)
 {
+	t_ray	new_ray;
+	t_vec3	oc;
+	float	a;
+	float	b;
+	float	c;
+	t_inter	res;
+	t_vec3	hp;
+
+	obj.vec = make_unit_vector(obj.vec);
+	new_ray.origin = ray.origin;
+	new_ray.direction = cross(ray.direction, obj.vec);
+	oc = vec_minus(ray.origin, obj.pos);
+	a = dot(new_ray.direction, new_ray.direction);
+	b = 2.0f * dot(new_ray.direction, cross(oc, obj.vec));
+	c = dot(cross(oc, obj.vec), cross(oc, obj.vec)) - powf(0.5f * obj.diameter, 2);
+	res.discri = b * b - (4.0f * a * c);
+	if (res.discri < 0.0f)
+		return (-1.0f);
+	res.t1 = (-b - sqrtf(res.discri)) / (2.0f * a);
+	res.t2 = (-b + sqrtf(res.discri)) / (2.0f * a);
+	res.t = fminf(res.t1, res.t2);
+	hp = vec_addition(ray.origin, vec_float_multi(res.t, ray.direction));
+	if (hp.y < obj.pos.y || hp.y > obj.pos.y + obj.height)
+		res.t = -1.0f;
+	else
+	{
+		if (res.t == res.t1)
+			res.t = res.t2;
+		else
+			res.t = res.t1;
+		hp = vec_addition(ray.origin, vec_float_multi(res.t, ray.direction));
+		if (hp.y < obj.pos.y || hp.y > obj.pos.y + obj.height)
+			return (-1.0f);
+	}
+	return (res.t);
+}
+
+/*float	hit_cylinder(t_obj obj, t_ray ray)
+{
 	t_vec3	oc;
 	float	a;
 	float	b;
@@ -71,7 +110,7 @@ float	hit_cylinder(t_obj obj, t_ray ray)
 	if (hp.y < obj.pos.y || hp.y > obj.pos.y + obj.height)
 		return (-1.0f);
 	return (res.t);
-}
+}*/
 
 /*float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
 {
