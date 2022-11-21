@@ -70,9 +70,9 @@ float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn)
 void	pixel_color(t_main *main, t_ray ray, int x, int y)
 {
 	t_vec3	rgb;
-	t_vec3	rgb_l;
+//	t_vec3	rgb_l;
 	t_vec3	light_pos;
-	float	l;
+//	float	l;
 	int		i;
 
 	light_pos = find_in_tab(&main->scn, 'L')->pos;
@@ -85,9 +85,9 @@ void	pixel_color(t_main *main, t_ray ray, int x, int y)
 	}
 	if (ray.closest_obj > -1)
 	{
-		l = shadow_value(ray, light_pos, main->scn);
-		rgb_l = vec_float_multi(l, find_in_tab(&main->scn, 'A')->rgb);
-		rgb = vec_multiplication(rgb_l, main->scn.obj[ray.closest_obj].rgb);
+//		l = shadow_value(ray, light_pos, main->scn);
+//		rgb_l = vec_float_multi(l, find_in_tab(&main->scn, 'A')->rgb);
+		rgb = main->scn.obj[ray.closest_obj].rgb; //vec_multiplication(rgb_l, main->scn.obj[ray.closest_obj].rgb);
 		put_pixel_color(&main->mlx, x, y, rgb);
 	}
 	else

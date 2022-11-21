@@ -77,19 +77,20 @@ typedef struct s_mlx
 	int			y_res;
 }							t_mlx;
 
-/*typedef struct s_rgb
-{
-	int		r;
-	int		g;
-	int		b;
-}				t_rgb;*/
-
 typedef struct s_vec3
 {
 	float	x;
 	float	y;
 	float	z;
 }				t_vec3;
+
+typedef struct s_intersection
+{
+	float	discri;
+	float	t1;
+	float	t2;
+	float	t;
+}				t_inter;
 
 typedef struct s_ray
 {
@@ -195,6 +196,7 @@ float	hit_sphere(t_vec3 center, float radius, t_ray ray);
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
 void	check_intersection(t_obj obj, int i, t_ray *ray);
 void	check_shadow_intersection(t_obj obj, int i, t_ray *ray);
+float	hit_cylinder(t_obj obj, t_ray ray);
 
 ///////////////////////		parcing.c	////////////////////////////////
 

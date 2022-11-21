@@ -68,7 +68,7 @@ void	rt_init(t_mlx *mlx)
 {
 	mlx->ptr = mlx_init();
 	mlx->aspect_ratio = 16.0f / 9.0f;
-	mlx->x_res = 1920;
+	mlx->x_res = 800;
 	mlx->y_res = mlx->x_res / (int)roundf(mlx->aspect_ratio);
 	mlx->window = mlx_new_window(mlx->ptr, mlx->x_res, mlx->y_res, "Mini RT");
 	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);

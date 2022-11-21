@@ -18,17 +18,18 @@ float	hit_sphere(t_vec3 center, float radius, t_ray ray)
 	float	a;
 	float	b;
 	float	c;
-	float	discri;
+	t_inter	res;
 
 	oc = vec_minus(ray.origin, center);
 	a = dot(ray.direction, ray.direction);
 	b = 2.0f * dot(oc, ray.direction);
 	c = dot(oc, oc) - (radius * radius);
-	discri = b * b - (4 * a * c);
-	if (discri < 0.0f)
+	res.discri = b * b - (4.0f * a * c);
+	if (res.discri < 0.0f)
 		return (-1.0f);
-	else
-		return (fminf((-b - sqrtf(discri)) / (2.0f * a), (-b + sqrtf(discri)) / (2.0f * a)));
+	res.t1 = (-b - sqrtf(res.discri)) / (2.0f * a);
+	res.t2 = (-b + sqrtf(res.discri)) / (2.0f * a);
+	return (fminf(res.t1, res.t2));
 }
 
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray)
@@ -49,7 +50,30 @@ float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray)
 	return (-1.0f);
 }
 
-float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
+float	hit_cylinder(t_obj obj, t_ray ray)
+{
+	t_vec3	oc;
+	float	a;
+	float	b;
+	float	c;
+	t_inter	res;
+	t_vec3	hp;
+
+	oc = vec_minus(ray.origin, obj.pos);
+	a = dot(ray.direction, ray.direction) - powf(dot(ray.direction, obj.vec), 2);
+	c = dot(oc, oc) - powf(dot(oc, obj.vec), 2) - powf(0.5f * obj.diameter, 2);
+	b = 2.0f * (dot(ray.direction, oc) - (dot(ray.direction, obj.vec) * dot(oc, obj.vec)));
+	res.discri = b * b - (4.0f * a * c);
+	res.t1 = (-b - sqrtf(res.discri)) / (2.0f * a);
+	res.t2 = (-b + sqrtf(res.discri)) / (2.0f * a);
+	res.t = fminf(res.t1, res.t2);
+	hp = vec_addition(ray.origin, vec_float_multi(res.t, ray.direction));
+	if (hp.y < obj.pos.y || hp.y > obj.pos.y + obj.height)
+		return (-1.0f);
+	return (res.t);
+}
+
+/*float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
 {
 	float	t;
 	t_vec3	p_inters;
@@ -69,7 +93,7 @@ float	hit_cylinder(t_vec3 pos, t_vec3 dir, float radius, t_ray ray)
 		return (t);
 	}
 	return (-1.0f);
-}
+}*/
 
 void	check_intersection(t_obj obj, int i, t_ray *ray)
 {
@@ -81,7 +105,7 @@ void	check_intersection(t_obj obj, int i, t_ray *ray)
 	else if (obj.id == PLANE)
 		t_obj = hit_plane(obj.pos, obj.vec, *ray);
 	else if (obj.id == CYLINDER)
-		t_obj = hit_cylinder(obj.pos, obj.vec, (obj.diameter * 0.5f), *ray);
+		t_obj = hit_cylinder(obj, *ray);
 	if (t_obj > 0.0f)
 	{
 		if (ray->closest_obj == -1)
@@ -106,6 +130,8 @@ void	check_shadow_intersection(t_obj obj, int i, t_ray *ray)
 		t_obj = hit_sphere(obj.pos, (obj.diameter * 0.5f), *ray);
 	else if (obj.id == PLANE)
 		t_obj = hit_plane(obj.pos, obj.vec, *ray);
+	else if (obj.id == CYLINDER)
+		t_obj = hit_cylinder(obj, *ray);
 	if (t_obj > 0.01f)
 	{
 		if (ray->closest_obj == -1)
