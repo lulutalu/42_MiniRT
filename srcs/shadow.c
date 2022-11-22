@@ -20,7 +20,7 @@ float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn)
 	int		i;
 
 	i = 0;
-	coeff = 0.0f;
+	coeff = 1.5f;
 	hit_point = vec_addition(ray.origin, vec_float_multi(ray.t, ray.direction));
 	shadow.origin = hit_point;
 	shadow.direction = normalize(vec_minus(l_pos, shadow.origin));
@@ -33,10 +33,12 @@ float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn)
 	if (shadow.i_close == -1)
 	{
 		coeff = dot(ray_normal(ray, scn, hit_point), shadow.direction);
-		coeff *= find_in_tab(&scn, 'L')->light_r;
+//		coeff *= find_in_tab(&scn, 'L')->light_r;
 	}
-	if (coeff < find_in_tab(&scn, 'A')->light_r)
-		coeff = find_in_tab(&scn, 'A')->light_r;
+//	if (coeff < find_in_tab(&scn, 'A')->light_r)
+//		coeff = find_in_tab(&scn, 'A')->light_r;
+	if (coeff == 1.5f)
+		coeff = dot(ray_normal(ray, scn, hit_point), shadow.direction);
 	return (coeff);
 }
 
@@ -50,7 +52,10 @@ t_vec3	ray_normal(t_ray ray, t_scn scn, t_vec3 hit_point)
 	else if (scn.obj[ray.i_close].id == PLANE)
 		normal = scn.obj[ray.i_close].vec;
 	else if (scn.obj[ray.i_close].id == CYLINDER)
+	{
 		normal = cylinder_normal(ray, hit_point, scn);
+//		printf("Normal of Cylinder : X : %f\tY : %f\tZ : %f\n", normal.x, normal.y, normal.z);
+	}
 	return (normal);
 }
 
@@ -61,9 +66,9 @@ t_vec3	cylinder_normal(t_ray ray, t_vec3 hit_point, t_scn scn)
 	float	t;
 
 	normal = new_vec(0.0f, 0.0f, 0.0f);
-	if (hit_point.z == scn.obj[ray.i_close].pos.z)
+	if (hit_point.z - 0.1f < scn.obj[ray.i_close].pos.z)
 		normal = vec_float_multi(-1.0f, scn.obj[ray.i_close].vec);
-	else if (hit_point.z == scn.obj[ray.i_close].pos.z + scn.obj[ray.i_close].height)
+	else if (hit_point.z + 0.1f > scn.obj[ray.i_close].pos.z + scn.obj[ray.i_close].height)
 		normal = scn.obj[ray.i_close].vec;
 	else
 	{

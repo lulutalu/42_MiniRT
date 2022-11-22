@@ -38,7 +38,7 @@ float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray)
 
 	t = 0;
 	denom = dot(dir, ray.direction);
-	if (fabs(denom) > 0.0001f)
+	if (fabs(denom) > 0.0000001f)
 	{
 		diff = vec_minus(pos, ray.origin);
 		t = dot(diff, dir);
@@ -110,7 +110,7 @@ void	check_shadow_intersection(t_obj obj, int i, t_ray *ray)
 		t_obj = hit_plane(obj.pos, obj.vec, *ray);
 	else if (obj.id == CYLINDER)
 		t_obj = hit_cylinder(obj, *ray);
-	if (t_obj > 0.01f)
+	if (t_obj > 0.1f)
 	{
 		if (ray->i_close == -1)
 		{
