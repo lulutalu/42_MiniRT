@@ -25,61 +25,9 @@ t_ray	ray_generation(t_main *main, int x, int y)
 	tmp = vec_float_multi(v, main->cam.up);
 	res.direction = vec_addition(tmp, res.direction);
 	res.direction = vec_addition(res.direction, main->cam.forward);
-	res.direction = make_unit_vector(res.direction);
+	res.direction = normalize(res.direction);
 	res.origin = main->cam.pos;
 	return (res);
-}
-
-float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn)
-{
-	t_ray	shadow;
-	t_vec3	hit_point;
-	t_vec3	normal;
-	t_vec3	pt;
-	float	coeff;
-	int		i;
-	float	t;
-
-	i = 0;
-	normal = new_vec(0, 0, 0);
-	hit_point = vec_addition(ray.origin, vec_float_multi(ray.t, ray.direction));
-	shadow.origin = hit_point;
-	shadow.direction = make_unit_vector(vec_minus(l_pos, shadow.origin));
-	shadow.closest_obj = -1;
-	while (i < scn.n_obj)
-	{
-		check_shadow_intersection(scn.obj[i], i, &shadow);
-		i++;
-	}
-	if (shadow.closest_obj == -1)
-	{
-		if (scn.obj[ray.closest_obj].id == SPHERE)
-			normal = make_unit_vector(vec_minus(hit_point, scn.obj[ray.closest_obj].pos));
-		else if (scn.obj[ray.closest_obj].id == PLANE)
-			normal = scn.obj[ray.closest_obj].vec;
-		else if (scn.obj[ray.closest_obj].id == CYLINDER)
-		{
-			if (hit_point.z == scn.obj[ray.closest_obj].pos.z)
-				normal = vec_float_multi(-1.0f, scn.obj[ray.closest_obj].vec);
-			else if (hit_point.z == scn.obj[ray.closest_obj].pos.z + scn.obj[ray.closest_obj].height)
-				normal = scn.obj[ray.closest_obj].vec;
-			else
-			{
-				t = dot(vec_minus(hit_point, scn.obj[ray.closest_obj].pos), scn.obj[ray.closest_obj].vec);
-				pt = vec_addition(scn.obj[ray.closest_obj].pos, vec_float_multi(t, scn.obj[ray.closest_obj].vec));
-				normal = make_unit_vector(vec_minus(hit_point, pt));
-			}
-		}
-		coeff = dot(normal, shadow.direction);
-		if (coeff < 0.0f && scn.obj[ray.closest_obj].id == PLANE)
-			coeff *= -1.0f;
-		coeff *= find_in_tab(&scn, 'L')->light_r;
-	}
-	else
-		coeff = find_in_tab(&scn, 'A')->light_r;
-	if (coeff < find_in_tab(&scn, 'A')->light_r)
-		coeff = find_in_tab(&scn, 'A')->light_r;
-	return (coeff);
 }
 
 void	pixel_color(t_main *main, t_ray ray, int x, int y)
@@ -92,17 +40,17 @@ void	pixel_color(t_main *main, t_ray ray, int x, int y)
 
 	light_pos = find_in_tab(&main->scn, 'L')->pos;
 	i = 0;
-	ray.closest_obj = -1;
+	ray.i_close = -1;
 	while (i < main->scn.n_obj)
 	{
 		check_intersection(main->scn.obj[i], i, &ray);
 		i++;
 	}
-	if (ray.closest_obj > -1)
+	if (ray.i_close > -1)
 	{
 		l = shadow_value(ray, light_pos, main->scn);
 		rgb_l = vec_float_multi(l, find_in_tab(&main->scn, 'A')->rgb);
-		rgb = vec_multiplication(rgb_l, main->scn.obj[ray.closest_obj].rgb);
+		rgb = vec_multiplication(rgb_l, main->scn.obj[ray.i_close].rgb);
 		put_pixel_color(&main->mlx, x, y, rgb);
 	}
 	else

@@ -36,8 +36,10 @@ SRCS_FILES		= main.c \
 				  vector2.c \
 				  vector3.c \
 				  raytracing.c \
+				  shadow.c \
 				  camera.c \
-					intersection.c \
+				  intersection.c \
+				  cylinder.c \
 				  parsing.c \
 				  parsing_utils.c \
 				  check_args.c \

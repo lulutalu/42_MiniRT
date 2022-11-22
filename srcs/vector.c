@@ -20,7 +20,7 @@ float	vec_length(t_vec3 vec)
 	return (res);
 }
 
-t_vec3	make_unit_vector(t_vec3 vec)
+t_vec3	normalize(t_vec3 vec)
 {
 	t_vec3	new_vec;
 	float	k;

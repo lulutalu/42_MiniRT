@@ -34,9 +34,9 @@ void	camera_init(t_mlx *mlx, t_camera *cam, t_scn *scn)
 	cam->fov = cam_info->fov;
 	cam->pos = cam_info->pos;
 	cam->dir = cam_info->vec;
-	cam->forward = make_unit_vector(cam->dir);
+	cam->forward = normalize(cam->dir);
 	cam->right = cross(new_vec(0.0f, -1.0f, 0.0f), cam->forward);
-	cam->right = make_unit_vector(cam->right);
+	cam->right = normalize(cam->right);
 	cam->up = vec_float_multi(-1.0f, cross(cam->forward, cam->right));
 	cam->w = (float)fabs(tan(cam->fov));
 	cam->h = cam->w * mlx->aspect_ratio;

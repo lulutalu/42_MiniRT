@@ -84,6 +84,13 @@ typedef struct s_vec3
 	float	z;
 }				t_vec3;
 
+typedef struct s_poly
+{
+	float	a;
+	float	b;
+	float	c;
+}				t_poly;
+
 typedef struct s_intersection
 {
 	float	discri;
@@ -96,7 +103,7 @@ typedef struct s_ray
 {
 	t_vec3	origin;
 	t_vec3	direction;
-	int		closest_obj;
+	int		i_close;
 	float	t;
 }				t_ray;
 
@@ -161,7 +168,7 @@ void	put_pixel_color(t_mlx *mlx, int x, int y, t_vec3 rgb);
 /////////////////////////		vector.c		////////////////////////////////
 
 float	vec_length(t_vec3 vec);
-t_vec3	make_unit_vector(t_vec3 vec);
+t_vec3	normalize(t_vec3 vec);
 t_vec3	vec_addition(t_vec3 lhs, t_vec3 rhs);
 t_vec3	vec_multiplication(t_vec3 lhs, t_vec3 rhs);
 t_vec3	vec_float_multi(float m, t_vec3 vec);
@@ -182,7 +189,6 @@ bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
 
 int		frame_loop(t_main *main);
 void	pixel_color(t_main *main, t_ray ray, int x, int y);
-float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scnene);
 t_ray	ray_generation(t_main *main, int x, int y);
 
 ///////////////////////			camera.c	////////////////////////////////
@@ -197,6 +203,16 @@ float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
 void	check_intersection(t_obj obj, int i, t_ray *ray);
 void	check_shadow_intersection(t_obj obj, int i, t_ray *ray);
 float	hit_cylinder(t_obj obj, t_ray ray);
+
+///////////////////////			shadow.c		////////////////////////////////
+
+float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn);
+t_vec3	ray_normal(t_ray ray, t_scn scn, t_vec3 hit_point);
+t_vec3	cylinder_normal(t_ray ray, t_vec3 hit_point, t_scn scn);
+
+///////////////////////		cylinder.c		////////////////////////////////
+
+void	hit_wich_cylinder(t_ray ray, t_inter *res, t_obj obj);
 
 ///////////////////////		parcing.c	////////////////////////////////
 
