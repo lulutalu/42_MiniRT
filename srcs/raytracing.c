@@ -35,8 +35,10 @@ float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn)
 	t_ray	shadow;
 	t_vec3	hit_point;
 	t_vec3	normal;
+	t_vec3	pt;
 	float	coeff;
 	int		i;
+	float	t;
 
 	i = 0;
 	normal = new_vec(0, 0, 0);
@@ -56,7 +58,18 @@ float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn)
 		else if (scn.obj[ray.closest_obj].id == PLANE)
 			normal = scn.obj[ray.closest_obj].vec;
 		else if (scn.obj[ray.closest_obj].id == CYLINDER)
-			normal = new_vec(0, 0, -1);
+		{
+			if (hit_point.z == scn.obj[ray.closest_obj].pos.z)
+				normal = vec_float_multi(-1.0f, scn.obj[ray.closest_obj].vec);
+			else if (hit_point.z == scn.obj[ray.closest_obj].pos.z + scn.obj[ray.closest_obj].height)
+				normal = scn.obj[ray.closest_obj].vec;
+			else
+			{
+				t = dot(vec_minus(hit_point, scn.obj[ray.closest_obj].pos), scn.obj[ray.closest_obj].vec);
+				pt = vec_addition(scn.obj[ray.closest_obj].pos, vec_float_multi(t, scn.obj[ray.closest_obj].vec));
+				normal = make_unit_vector(vec_minus(hit_point, pt));
+			}
+		}
 		coeff = dot(normal, shadow.direction);
 		if (coeff < 0.0f && scn.obj[ray.closest_obj].id == PLANE)
 			coeff *= -1.0f;

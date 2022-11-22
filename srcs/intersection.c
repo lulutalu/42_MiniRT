@@ -75,8 +75,6 @@ float	hit_cylinder(t_obj obj, t_ray ray)
 	res.t = fminf(res.t1, res.t2);
 	hp = vec_addition(ray.origin, vec_float_multi(res.t, ray.direction));
 	if (hp.y < obj.pos.y || hp.y > obj.pos.y + obj.height)
-		res.t = -1.0f;
-	else
 	{
 		if (res.t == res.t1)
 			res.t = res.t2;
