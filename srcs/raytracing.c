@@ -63,7 +63,7 @@ int	frame_loop(t_main *main)
 	int	y;
 
 	image_init(&main->mlx);
-	printf("%f\n", main->cam.pos.z);
+	camera_update(main);
 	y = 0;
 	while (y < main->mlx.y_res)
 	{

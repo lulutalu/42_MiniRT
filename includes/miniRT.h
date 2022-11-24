@@ -44,6 +44,16 @@
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
 
+# define Q 12
+# define E 14
+
+# define A 0
+# define D 2
+# define L 37
+# define K 40
+# define H 4
+# define J 38
+
 # define ESC 53
 
 /////////////////////////		Macro		////////////////////////////////////
@@ -198,6 +208,7 @@ t_ray	ray_generation(t_main *main, int x, int y);
 
 void	camera_init(t_mlx *mlx, t_camera *cam, t_scn *scn);
 t_obj	*find_in_tab(t_scn *scn, int id);
+void	camera_update(t_main *main);
 
 ///////////////////////		intersection.c	////////////////////////////////
 

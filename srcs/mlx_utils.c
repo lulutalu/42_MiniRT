@@ -24,12 +24,12 @@ int	keyhook(int keycode, t_main *main)
 {
 	if (keycode == RIGHT_ARROW)
 	{
-		main->cam.dir.y += 0.4f;
+		main->cam.pos.x += 0.5f;
 		frame_loop(main);
 	}
 	if (keycode == LEFT_ARROW)
 	{
-		main->cam.dir.y -= 0.4f;
+		main->cam.pos.x -= 0.5f;
 		frame_loop(main);
 	}
 	if (keycode == UP_ARROW)
@@ -40,6 +40,46 @@ int	keyhook(int keycode, t_main *main)
 	if (keycode == DOWN_ARROW)
 	{
 		main->cam.pos.z += 0.2f;
+		frame_loop(main);
+	}
+	if (keycode == Q)
+	{
+		main->cam.pos.y += 0.5f;
+		frame_loop(main);
+	}
+	if (keycode == E)
+	{
+		main->cam.pos.y -= 0.5f;
+		frame_loop(main);
+	}
+	if (keycode == A)
+	{
+		main->cam.dir.x -= 0.1f;
+		frame_loop(main);
+	}
+	if (keycode == D)
+	{
+		main->cam.dir.x += 0.1f;
+		frame_loop(main);
+	}
+	if (keycode == L)
+	{
+		main->cam.dir.y += 0.1f;
+		frame_loop(main);
+	}
+	if (keycode == K)
+	{
+		main->cam.dir.y -= 0.1f;
+		frame_loop(main);
+	}
+	if (keycode == J)
+	{
+		main->cam.dir.z += 0.1f;
+		frame_loop(main);
+	}
+	if (keycode == H)
+	{
+		main->cam.dir.z -= 0.1f;
 		frame_loop(main);
 	}
 	if (keycode == ESC)
