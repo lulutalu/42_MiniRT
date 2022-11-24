@@ -52,6 +52,8 @@
 # define PLANE 1
 # define CYLINDER 2
 
+# define EPSILON 0.1f
+
 # define PI 3.142857
 
 /*
@@ -184,6 +186,7 @@ t_vec3	vec_div(float div, t_vec3 vec);
 /////////////////////////		vector3.c		////////////////////////////////
 
 bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
+float	distance(t_vec3 lhs, t_vec3 rhs);
 
 ///////////////////////		raytracing.c	////////////////////////////////
 
@@ -201,7 +204,7 @@ t_obj	*find_in_tab(t_scn *scn, int id);
 float	hit_sphere(t_vec3 center, float radius, t_ray ray);
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray);
 void	check_intersection(t_obj obj, int i, t_ray *ray);
-void	check_shadow_intersection(t_obj obj, int i, t_ray *ray);
+void	check_shadow_intersection(t_obj obj, int i, t_ray *ray, float t_max);
 float	hit_cylinder(t_obj obj, t_ray ray);
 
 ///////////////////////			shadow.c		////////////////////////////////

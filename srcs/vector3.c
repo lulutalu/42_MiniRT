@@ -25,3 +25,13 @@ bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs)
 		res = false;
 	return (res);
 }
+
+float	distance(t_vec3 lhs, t_vec3 rhs)
+{
+	float	dist;
+
+	dist = powf(rhs.x - lhs.x, 2) + powf(rhs.y - lhs.y, 2) + \
+		powf(rhs.z - lhs.z, 2);
+	dist = sqrtf(dist);
+	return (dist);
+}

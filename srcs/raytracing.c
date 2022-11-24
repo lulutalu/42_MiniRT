@@ -33,7 +33,7 @@ t_ray	ray_generation(t_main *main, int x, int y)
 void	pixel_color(t_main *main, t_ray ray, int x, int y)
 {
 	t_vec3	rgb;
-	t_vec3	rgb_l;
+//	t_vec3	rgb_l;
 	t_vec3	light_pos;
 	float	l;
 	int		i;
@@ -49,12 +49,12 @@ void	pixel_color(t_main *main, t_ray ray, int x, int y)
 	if (ray.i_close > -1)
 	{
 		l = shadow_value(ray, light_pos, main->scn);
-		rgb_l = vec_float_multi(l, find_in_tab(&main->scn, 'A')->rgb);
-		rgb = vec_multiplication(rgb_l, main->scn.obj[ray.i_close].rgb);
+//		rgb_l = vec_float_multi(l, find_in_tab(&main->scn, 'A')->rgb);
+		rgb = vec_float_multi(l, main->scn.obj[ray.i_close].rgb);
 		put_pixel_color(&main->mlx, x, y, rgb);
 	}
 	else
-		put_pixel_color(&main->mlx, x, y, new_vec(0, 0, 0));
+		put_pixel_color(&main->mlx, x, y, new_vec(0.0f, 0.0f, 0.0f));
 }
 
 int	frame_loop(t_main *main)

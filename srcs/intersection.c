@@ -26,8 +26,9 @@ float	hit_sphere(t_vec3 center, float radius, t_ray ray)
 	if (res.discri < 0.0f)
 		return (-1.0f);
 	res.t1 = (-poly.b - sqrtf(res.discri)) / (2.0f * poly.a);
-	res.t2 = (-poly.b + sqrtf(res.discri)) / (2.0f * poly.a);
-	return (fminf(res.t1, res.t2));
+	if (res.t1 > 0.0f)
+		return (fabsf(res.t1));
+	return (res.t1);
 }
 
 float	hit_plane(t_vec3 pos, t_vec3 dir, t_ray ray)
@@ -99,7 +100,7 @@ void	check_intersection(t_obj obj, int i, t_ray *ray)
 	}
 }
 
-void	check_shadow_intersection(t_obj obj, int i, t_ray *ray)
+void	check_shadow_intersection(t_obj obj, int i, t_ray *ray, float t_max)
 {
 	float	t_obj;
 
@@ -110,7 +111,7 @@ void	check_shadow_intersection(t_obj obj, int i, t_ray *ray)
 		t_obj = hit_plane(obj.pos, obj.vec, *ray);
 	else if (obj.id == CYLINDER)
 		t_obj = hit_cylinder(obj, *ray);
-	if (t_obj > 0.1f)
+	if (t_obj > 0.1f && t_obj < t_max + EPSILON)
 	{
 		if (ray->i_close == -1)
 		{
