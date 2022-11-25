@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:26:40 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/11/02 22:57:17 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:38:16 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,24 @@ void	get_rgb(char *rgb, t_main *m, int i)
 		exit_error("RGB : Invalid input : char\n", m);
 	split = ft_split(rgb, ',');
 	if (check_size_tab(split, 3))
+	{
+		ft_tab_free((void **)split);
 		exit_error("RGB : Invalid input : nb\n", m);
+	}
 	while (split[j])
 	{
 		tmp = ft_atoi(split[j]);
 		if (tmp < 0 || tmp > 255)
+		{
+			ft_tab_free((void **)split);
 			exit_error("RGB : Invalid input : range\n", m);
+		}
 		j++;
 	}
 	m->scn.obj[i].rgb.x = ft_atof(split[0]) / 255;
 	m->scn.obj[i].rgb.y = ft_atof(split[1]) / 255;
 	m->scn.obj[i].rgb.z = ft_atof(split[2]) / 255;
-	free(split);
+	ft_tab_free((void **)split);
 }
 
 void	get_pos(char *coord, t_main *m, int i)
@@ -57,14 +63,22 @@ void	get_pos(char *coord, t_main *m, int i)
 	j = 0;
 	split = ft_split(coord, ',');
 	while (j < 3)
+	{
 		if (valid_char(split[j++]))
+		{
+			ft_tab_free((void **)split);
 			exit_error("COORD : Invalid input : char\n", m);
+		}
+	}
 	if (check_size_tab(split, 3))
+	{
+		ft_tab_free((void **)split);
 		exit_error("COORD : Invalid input : nb\n", m);
+	}
 	m->scn.obj[i].pos.x = ft_atof(split[0]);
 	m->scn.obj[i].pos.y = ft_atof(split[1]);
 	m->scn.obj[i].pos.z = ft_atof(split[2]);
-	free(split);
+	ft_tab_free((void **)split);
 }
 
 void	get_vec(char *coord, t_main *m, int i)
@@ -76,19 +90,28 @@ void	get_vec(char *coord, t_main *m, int i)
 	j = -1;
 	split = ft_split(coord, ',');
 	if (check_size_tab(split, 3))
+	{
+		ft_tab_free((void **)split);
 		exit_error("V3d : Invalid input nb arg\n", m);
+	}
 	while (split[++j])
 	{
 		if (valid_char(split[j]))
+		{
+			ft_tab_free((void **)split);
 			exit_error("V3d : Invalid input invalid char\n", m);
+		}
 		p = ft_atoi(split[j]);
 		if (p < -1 || p > 1)
+		{
+			ft_tab_free((void **)split);
 			exit_error("V3d : Invalid input : range\n", m);
+		}
 	}
 	m->scn.obj[i].vec.x = ft_atof(split[0]);
 	m->scn.obj[i].vec.y = ft_atof(split[1]);
 	m->scn.obj[i].vec.z = ft_atof(split[2]);
-	free(split);
+	ft_tab_free((void **)split);
 }
 
 void	get_fov(char *fov, t_main *m, int i)

@@ -1,0 +1,65 @@
+==17584== Memcheck, a memory error detector
+==17584== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==17584== Using Valgrind-3.19.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==17584== Command: ./miniRT files/ld_test.rt
+==17584== Parent PID: 9145
+==17584== 
+--17584-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option
+--17584-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 2 times)
+--17584-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 4 times)
+--17584-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 8 times)
+UNKNOWN workq_ops option 1024
+==17584== Thread 2:
+==17584== Invalid read of size 4
+==17584==    at 0x106251C10: _pthread_wqthread_setup (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==    by 0x106251942: _pthread_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==    by 0x106250B76: start_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==  Address 0x18 is not stack'd, malloc'd or (recently) free'd
+==17584== 
+==17584== 
+==17584== Process terminating with default action of signal 11 (SIGSEGV)
+==17584==  Access not within mapped region at address 0x18
+==17584==    at 0x106251C10: _pthread_wqthread_setup (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==    by 0x106251942: _pthread_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==    by 0x106250B76: start_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==  If you believe this happened as a result of a stack
+==17584==  overflow in your program's main thread (unlikely but
+==17584==  possible), you can try to increase the size of the
+==17584==  main thread stack using the --main-stacksize= flag.
+==17584==  The main thread stack size used in this run was 8388608.
+==17584== 
+==17584== HEAP SUMMARY:
+==17584==     in use at exit: 1,448,487 bytes in 1,168 blocks
+==17584==   total heap usage: 1,751 allocs, 583 frees, 2,717,898 bytes allocated
+==17584== 
+==17584== LEAK SUMMARY:
+==17584==    definitely lost: 14,115 bytes in 207 blocks
+==17584==    indirectly lost: 5,376 bytes in 115 blocks
+==17584==      possibly lost: 3,704 bytes in 71 blocks
+==17584==    still reachable: 47,253 bytes in 353 blocks
+==17584==                       of which reachable via heuristic:
+==17584==                         newarray           : 56 bytes in 1 blocks
+==17584==         suppressed: 1,378,039 bytes in 422 blocks
+==17584== Rerun with --leak-check=full to see details of leaked memory
+==17584== 
+==17584== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 53 from 4)
+==17584== 
+==17584== 1 errors in context 1 of 1:
+==17584== Invalid read of size 4
+==17584==    at 0x106251C10: _pthread_wqthread_setup (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==    by 0x106251942: _pthread_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==    by 0x106250B76: start_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==17584==  Address 0x18 is not stack'd, malloc'd or (recently) free'd
+==17584== 
+--17584-- 
+--17584-- used_suppression:     16 OSX1015:dyld-7 /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:781 suppressed: 1,055,912 bytes in 139 blocks
+--17584-- used_suppression:      2 OSX1015:dyld-4 /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:751 suppressed: 294,944 bytes in 2 blocks
+--17584-- used_suppression:     14 OSX1015:dyld-8 /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:791 suppressed: 18,303 bytes in 159 blocks
+--17584-- used_suppression:      8 OSX1015:dyld-5 /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:761 suppressed: 7,848 bytes in 100 blocks
+--17584-- used_suppression:      9 OSX1015:Leak03-objc /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:830 suppressed: 640 bytes in 10 blocks
+--17584-- used_suppression:     12 OSX1015:Leak05-libsystem_c /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:849 suppressed: 392 bytes in 12 blocks
+--17584-- used_suppression:     12 OSX1015:dyld-1 /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:726
+--17584-- used_suppression:     24 OSX1015:dyld-3 /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:742
+--17584-- used_suppression:     17 OSX1015:dyld-2 /Users/ngda-sil/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:733
+==17584== 
+==17584== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 53 from 4)
