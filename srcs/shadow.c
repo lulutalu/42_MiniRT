@@ -60,12 +60,9 @@ t_vec3	ray_normal(t_ray ray, t_scn scn, t_vec3 hit_point)
 t_vec3	cylinder_normal(t_ray ray, t_vec3 hit_point, t_scn scn)
 {
 	t_vec3	normal;
-	t_vec3	pt;
-	float	t;
 
 	normal = new_vec(0.0f, 0.0f, 0.0f);
-	t = dot(vec_minus(hit_point, scn.obj[ray.i_close].pos), scn.obj[ray.i_close].vec);
-	pt = vec_addition(scn.obj[ray.i_close].pos, vec_float_multi(t, scn.obj[ray.i_close].vec));
-	normal = normalize(vec_minus(hit_point, pt));
+	normal = vec_minus(hit_point, scn.obj[ray.i_close].pos);
+	normal = normalize(normal);
 	return (normal);
 }
