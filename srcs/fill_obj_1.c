@@ -46,6 +46,5 @@ void	fill_obj_l(char **info, t_main *m, int i)
 	m->scn.obj[i].id = 'L';
 	get_pos(info[1], m, i);
 	get_l_r(info[2], m, i);
-	//get_rgb(info[3], m, i);
 	m->scn.l++;
 }

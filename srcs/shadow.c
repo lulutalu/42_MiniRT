@@ -64,15 +64,8 @@ t_vec3	cylinder_normal(t_ray ray, t_vec3 hit_point, t_scn scn)
 	float	t;
 
 	normal = new_vec(0.0f, 0.0f, 0.0f);
-	if (hit_point.z - 0.1f < scn.obj[ray.i_close].pos.z)
-		normal = vec_float_multi(-1.0f, scn.obj[ray.i_close].vec);
-	else if (hit_point.z + 0.1f > scn.obj[ray.i_close].pos.z + scn.obj[ray.i_close].height)
-		normal = scn.obj[ray.i_close].vec;
-	else
-	{
-		t = dot(vec_minus(hit_point, scn.obj[ray.i_close].pos), scn.obj[ray.i_close].vec);
-		pt = vec_addition(scn.obj[ray.i_close].pos, vec_float_multi(t, scn.obj[ray.i_close].vec));
-		normal = normalize(vec_minus(hit_point, pt));
-	}
+	t = dot(vec_minus(hit_point, scn.obj[ray.i_close].pos), scn.obj[ray.i_close].vec);
+	pt = vec_addition(scn.obj[ray.i_close].pos, vec_float_multi(t, scn.obj[ray.i_close].vec));
+	normal = normalize(vec_minus(hit_point, pt));
 	return (normal);
 }

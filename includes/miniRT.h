@@ -167,10 +167,14 @@ typedef struct s_main
 /////////////////////////		mlx_utils.c		////////////////////////////////
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		keyhook(int keycode, t_main *main);
 void	image_init(t_mlx *mlx);
 int		close_window(int keycode, t_mlx *mlx);
 void	rt_init(t_mlx *mlx);
+
+/////////////////////////		keymaps.c		////////////////////////////////
+
+int		keyhook(int keycode, t_main *main);
+int		keyhook_more(int keycode, t_main *main);
 
 /////////////////////////		colors.c		////////////////////////////////
 

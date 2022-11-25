@@ -31,6 +31,7 @@ SRCS_DIR		:= ./srcs/
 ##############################   FILES  ########################################
 SRCS_FILES		= main.c \
 				  mlx_utils.c \
+				  keymaps.c \
 				  colors.c \
 				  vector.c \
 				  vector2.c \
