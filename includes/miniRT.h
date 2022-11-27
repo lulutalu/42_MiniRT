@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/02 22:57:26 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:22:23 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ typedef struct s_main
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	image_init(t_mlx *mlx);
-int		close_window(int keycode, t_mlx *mlx);
+int		close_window(t_main *m);
 void	rt_init(t_mlx *mlx);
 
 /////////////////////////		keymaps.c		////////////////////////////////
@@ -245,11 +245,12 @@ void	parse(int ac, char **av, t_main *m);
 
 ///////////////////////		check_args.c	////////////////////////////////
 
-void	check_args(int ac, char **av, t_main *m);
+void	check_args(int ac, char **av);
 
 ///////////////////////		clean.c	    ////////////////////////////////
 
-void	exit_error(char *str, t_main *m);
+void	exit_error_free(char *str, t_obj *ptr);
+void	exit_error(char *str);
 void	perror_exit(char *s);
 
 ///////////////////////		init.c	   ////////////////////////////////

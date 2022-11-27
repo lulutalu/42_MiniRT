@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:31:09 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/10/21 23:45:13 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:46:08 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	count_obj(char *f_path, t_main *m)
 		perror_exit("Problem opening file");
 	line = get_next_line(fd);
 	if (!line)
-		exit_error("File empty\n", m);
+		exit_error("File empty\n");
 	while (line)
 	{
 		if (line && ft_strcmp_case(line, "\n"))
