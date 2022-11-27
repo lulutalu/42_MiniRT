@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:57:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/11/17 14:26:03 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:07:50 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	fill_obj_tab(char **info, t_main *m)
 	else
 	{
 		printf("(%s)\n", info[0]);
-		exit_error("Invalid input : ID\n", m);
+		exit_error_free("Invalid input : ID\n", m->scn.obj);
 	}
 }
 
@@ -63,7 +63,7 @@ void	get_scn(char *f_path, t_main *m)
 
 void	parse(int ac, char **av, t_main *m)
 {
-	check_args(ac, av, m);
+	check_args(ac, av);
 	init_scn(&m->scn);
 	count_obj(av[1], m);
 	init_obj(m);
