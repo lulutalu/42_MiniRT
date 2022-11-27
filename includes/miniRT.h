@@ -62,7 +62,7 @@
 # define PLANE 1
 # define CYLINDER 2
 
-# define EPSILON 0.1f
+# define EPSILON 0.01f
 
 # define PI 3.142857
 
@@ -201,6 +201,11 @@ t_vec3	vec_div(float div, t_vec3 vec);
 
 bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
 float	distance(t_vec3 lhs, t_vec3 rhs);
+t_vec3	rotate(t_vec3 p, float ax, float ay, float az);
+void	get_angle_mtx(float (*m)[3][3][3], float ax, float ay, float az);
+void	mtx_setline(float (*line)[], float a, float b, float c);
+void	mtx_mul(float a[3][3], float b[3][1]);
+t_vec3	rev_rotate(t_vec3 p, float ax, float ay, float az);
 
 ///////////////////////		raytracing.c	////////////////////////////////
 
@@ -226,7 +231,7 @@ float	hit_cylinder(t_obj obj, t_ray ray);
 
 float	shadow_value(t_ray ray, t_vec3 l_pos, t_scn scn);
 t_vec3	ray_normal(t_ray ray, t_scn scn, t_vec3 hit_point);
-t_vec3	cylinder_normal(t_ray ray, t_vec3 hit_point, t_scn scn);
+t_vec3	cylinder_normal(t_obj *obj, t_vec3 hit_point);
 
 ///////////////////////		cylinder.c		////////////////////////////////
 

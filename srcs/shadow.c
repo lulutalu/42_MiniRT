@@ -53,16 +53,35 @@ t_vec3	ray_normal(t_ray ray, t_scn scn, t_vec3 hit_point)
 	else if (scn.obj[ray.i_close].id == PLANE)
 		normal = scn.obj[ray.i_close].vec;
 	else if (scn.obj[ray.i_close].id == CYLINDER)
-		normal = cylinder_normal(ray, hit_point, scn);
+		normal = cylinder_normal(&scn.obj[ray.i_close], hit_point);
 	return (normal);
 }
 
-t_vec3	cylinder_normal(t_ray ray, t_vec3 hit_point, t_scn scn)
+t_vec3	cylinder_normal(t_obj *obj, t_vec3 hit_point)
 {
-	t_vec3	normal;
+	t_vec3		pbis;
+	t_vec3		cpoint;
+	float		ax;
+	float		ay;
 
-	normal = new_vec(0.0f, 0.0f, 0.0f);
-	normal = vec_minus(hit_point, scn.obj[ray.i_close].pos);
-	normal = normalize(normal);
-	return (normal);
+	obj->vec = normalize(obj->vec);
+	if (is_vec_equal(obj->vec, new_vec(0.0f, 1.0f, 0.0f)))
+	{
+		printf("Vec is equal\n");
+		cpoint = new_vec(obj->pos.x, hit_point.y, obj->pos.z);
+		return (normalize(vec_minus(hit_point, cpoint)));
+	}
+	ax = atanf(obj->vec.z / obj->vec.x) * 180.0f / M_PI;
+	if (obj->vec.x < 0.0f)
+		ax += 180.0f;
+	ay = acosf(obj->vec.y / 1.0f) * 180.0f / M_PI;
+	pbis = vec_minus(hit_point, obj->pos);
+	pbis = rotate(pbis, 0.0f, ax, ay);
+	pbis = vec_addition(pbis, obj->pos);
+	cpoint = new_vec(obj->pos.x, obj->pos.y, obj->pos.z);
+	cpoint.y = pbis.y;
+	cpoint = vec_minus(cpoint, obj->pos);
+	cpoint = rev_rotate(cpoint, 0.0f, -ax, -ay);
+	cpoint = vec_addition(cpoint, obj->pos);
+	return (normalize(vec_minus(hit_point, cpoint)));
 }
