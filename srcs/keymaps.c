@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:36:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/25 21:38:29 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:22:01 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	keyhook(int keycode, t_main *main)
 {
 	if (keycode == ESC)
 	{
-		mlx_destroy_window(main->mlx.ptr, main->mlx.window);
 		free(main->scn.obj);
+		mlx_destroy_window(main->mlx.ptr, main->mlx.window);
 		exit(EXIT_SUCCESS);
 	}
 	else if (keycode == RIGHT_ARROW)

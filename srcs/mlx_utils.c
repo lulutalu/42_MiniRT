@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:36:14 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/17 14:25:26 by lduboulo         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:22:11 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ void	image_init(t_mlx *mlx)
 			&mlx->img.line_length, &mlx->img.endian);
 }
 
-int	close_window(int keycode, t_mlx *mlx)
+int	close_window(t_main *m)
 {
-	(void)keycode;
-	(void)mlx;
+	free(m->scn.obj);
 	exit(0);
 }
 
@@ -41,6 +40,5 @@ void	rt_init(t_mlx *mlx)
 	mlx->x_res = 1500;
 	mlx->y_res = mlx->x_res / (int)roundf(mlx->aspect_ratio);
 	mlx->window = mlx_new_window(mlx->ptr, mlx->x_res, mlx->y_res, "Mini RT");
-	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
 	mlx_do_key_autorepeaton(mlx->ptr);
 }

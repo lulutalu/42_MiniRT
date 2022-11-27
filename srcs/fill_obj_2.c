@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 03:02:18 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/11/02 20:21:20 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:46:03 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	valid_char_size(char *s)
 float	get_size(char *size, t_main *m)
 {
 	if (valid_char_size(size))
-		exit_error("DIAM / HEIGHT : Invalid input\n", m);
+		exit_error_free("DIAM / HEIGHT : Invalid input\n", m->scn.obj);
 	return (ft_atof(size));
 }
 
 void	fill_obj_sp(char **info, t_main *m, int i)
 {
 	if (check_size_tab(info, 4))
-		exit_error("sp wrong nb of info\n", m);
+		exit_error_free("sp wrong nb of info\n", m->scn.obj);
 	m->scn.obj[i].id = SPHERE;
 	get_pos(info[1], m, i);
 	m->scn.obj[i].diameter = get_size(info[2], m);
@@ -43,7 +43,7 @@ void	fill_obj_sp(char **info, t_main *m, int i)
 void	fill_obj_pl(char **info, t_main *m, int i)
 {
 	if (check_size_tab(info, 4))
-		exit_error("pl wrong nb of info\n", m);
+		exit_error_free("pl wrong nb of info\n", m->scn.obj);
 	m->scn.obj[i].id = PLANE;
 	get_pos(info[1], m, i);
 	get_vec(info[2], m, i);
@@ -53,7 +53,7 @@ void	fill_obj_pl(char **info, t_main *m, int i)
 void	fill_obj_cy(char **info, t_main *m, int i)
 {
 	if (check_size_tab(info, 6))
-		exit_error("cy wrong nb of info\n", m);
+		exit_error_free("cy wrong nb of info\n", m->scn.obj);
 	m->scn.obj[i].id = CYLINDER;
 	get_pos(info[1], m, i);
 	get_vec(info[2], m, i);
