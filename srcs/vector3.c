@@ -127,3 +127,13 @@ t_vec3	rev_rotate(t_vec3 p, float ax, float ay, float az)
 	p.z = point[2][0];
 	return (p);
 }
+
+void	color_max(t_vec3 *rgb)
+{
+	if (rgb->x > 1.0f)
+		rgb->x = 1.0f;
+	if (rgb->y > 1.0f)
+		rgb->y = 1.0f;
+	if (rgb->z > 1.0f)
+		rgb->z = 1.0f;
+}

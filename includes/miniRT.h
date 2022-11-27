@@ -206,6 +206,7 @@ void	get_angle_mtx(float (*m)[3][3][3], float ax, float ay, float az);
 void	mtx_setline(float (*line)[], float a, float b, float c);
 void	mtx_mul(float a[3][3], float b[3][1]);
 t_vec3	rev_rotate(t_vec3 p, float ax, float ay, float az);
+void	color_max(t_vec3 *rgb);
 
 ///////////////////////		raytracing.c	////////////////////////////////
 
@@ -236,6 +237,7 @@ t_vec3	cylinder_normal(t_obj *obj, t_vec3 hit_point);
 ///////////////////////		cylinder.c		////////////////////////////////
 
 void	hit_wich_cylinder(t_ray ray, t_inter *res, t_obj obj);
+float	cylinder_height(t_vec3 hp, t_inter *res, t_obj obj);
 
 ///////////////////////		parcing.c	////////////////////////////////
 

@@ -67,7 +67,6 @@ t_vec3	cylinder_normal(t_obj *obj, t_vec3 hit_point)
 	obj->vec = normalize(obj->vec);
 	if (is_vec_equal(obj->vec, new_vec(0.0f, 1.0f, 0.0f)))
 	{
-		printf("Vec is equal\n");
 		cpoint = new_vec(obj->pos.x, hit_point.y, obj->pos.z);
 		return (normalize(vec_minus(hit_point, cpoint)));
 	}
