@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:26:40 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/11/27 17:21:29 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:42:01 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void	get_rgb(char *rgb, t_main *m, int i)
 	{
 		tmp = ft_atoi(split[j]);
 		if (tmp < 0 || tmp > 255)
-		{
-			ft_tab_free((void **)split);
-			exit_error_free("RGB : Invalid input : range\n", m->scn.obj);
-		}
+			free_split_exit(split, m->scn.obj, "RGB : Invalid input : range\n");
 		j++;
 	}
 	m->scn.obj[i].rgb.x = ft_atof(split[0]) / 255;
@@ -63,18 +60,10 @@ void	get_pos(char *coord, t_main *m, int i)
 	j = 0;
 	split = ft_split(coord, ',');
 	while (j < 3)
-	{
 		if (valid_char(split[j++]))
-		{
-			ft_tab_free((void **)split);
-			exit_error_free("COORD : Invalid input : char\n", m->scn.obj);
-		}
-	}
+			free_split_exit(split, m->scn.obj, "COORD:Invalid input:char\n");
 	if (check_size_tab(split, 3))
-	{
-		ft_tab_free((void **)split);
-		exit_error_free("COORD : Invalid input : nb\n", m->scn.obj);
-	}
+		free_split_exit(split, m->scn.obj, "COORD : Invalid input : nb\n");
 	m->scn.obj[i].pos.x = ft_atof(split[0]);
 	m->scn.obj[i].pos.y = ft_atof(split[1]);
 	m->scn.obj[i].pos.z = ft_atof(split[2]);
@@ -90,23 +79,14 @@ void	get_vec(char *coord, t_main *m, int i)
 	j = -1;
 	split = ft_split(coord, ',');
 	if (check_size_tab(split, 3))
-	{
-		ft_tab_free((void **)split);
-		exit_error_free("V3d : Invalid input nb arg\n", m->scn.obj);
-	}
+		free_split_exit(split, m->scn.obj, "V3d : Invalid input nb arg\n");
 	while (split[++j])
 	{
 		if (valid_char(split[j]))
-		{
-			ft_tab_free((void **)split);
-			exit_error_free("V3d : Invalid input invalid char\n", m->scn.obj);
-		}
+			free_split_exit(split, m->scn.obj, "V3d: Invalid char\n");
 		p = ft_atoi(split[j]);
 		if (p < -1 || p > 1)
-		{
-			ft_tab_free((void **)split);
-			exit_error_free("V3d : Invalid input : range\n", m->scn.obj);
-		}
+			free_split_exit(split, m->scn.obj, "V3d : Invalid input : range\n");
 	}
 	m->scn.obj[i].vec.x = ft_atof(split[0]);
 	m->scn.obj[i].vec.y = ft_atof(split[1]);

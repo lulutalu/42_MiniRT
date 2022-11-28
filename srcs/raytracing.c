@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:54:21 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/10 20:09:35 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:45:04 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,16 @@ void	pixel_color(t_main *main, t_ray ray, int x, int y)
 	int		i;
 
 	light_pos = find_in_tab(&main->scn, 'L')->pos;
-	i = 0;
+	i = -1;
 	ray.i_close = -1;
-	while (i < main->scn.n_obj)
-	{
+	while (++i < main->scn.n_obj)
 		check_intersection(main->scn.obj[i], i, &ray);
-		i++;
-	}
 	if (ray.i_close > -1)
 	{
 		l = shadow_value(ray, light_pos, main->scn);
 		rgb_l = vec_float_multi(l, main->scn.obj[ray.i_close].rgb);
-		rgb = vec_float_multi(find_in_tab(&main->scn, 'A')->light_r, find_in_tab(&main->scn, 'A')->rgb);
+		rgb = vec_float_multi(find_in_tab(&main->scn, 'A')->light_r,
+				find_in_tab(&main->scn, 'A')->rgb);
 		rgb = vec_addition(rgb_l, rgb);
 		color_max(&rgb);
 		put_pixel_color(&main->mlx, x, y, rgb);

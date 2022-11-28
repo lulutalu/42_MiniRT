@@ -6,7 +6,7 @@
 #    By: lduboulo && lzima				                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 18:29:51 by lduboulo          #+#    #+#              #
-#    Updated: 2022/11/25 20:46:54 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/11/28 13:50:31 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS_FILES		= main.c \
 				  vector.c \
 				  vector2.c \
 				  vector3.c \
+				  matrix.c \
 				  raytracing.c \
 				  shadow.c \
 				  camera.c \

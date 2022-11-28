@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 14:55:19 by lduboulo          #+#    #+#             */
-/*   Updated: 2022/11/27 17:22:23 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:56:35 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,12 +201,15 @@ t_vec3	vec_div(float div, t_vec3 vec);
 
 bool	is_vec_equal(t_vec3 lhs, t_vec3 rhs);
 float	distance(t_vec3 lhs, t_vec3 rhs);
+void	color_max(t_vec3 *rgb);
+
+/////////////////////////		matrix.c		////////////////////////////////
+
 t_vec3	rotate(t_vec3 p, float ax, float ay, float az);
 void	get_angle_mtx(float (*m)[3][3][3], float ax, float ay, float az);
 void	mtx_setline(float (*line)[], float a, float b, float c);
 void	mtx_mul(float a[3][3], float b[3][1]);
 t_vec3	rev_rotate(t_vec3 p, float ax, float ay, float az);
-void	color_max(t_vec3 *rgb);
 
 ///////////////////////		raytracing.c	////////////////////////////////
 
@@ -252,6 +255,7 @@ void	check_args(int ac, char **av);
 void	exit_error_free(char *str, t_obj *ptr);
 void	exit_error(char *str);
 void	perror_exit(char *s);
+void	free_split_exit(char **split, t_obj *obj, char *str);
 
 ///////////////////////		init.c	   ////////////////////////////////
 
