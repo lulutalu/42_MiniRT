@@ -71,7 +71,7 @@ MKDIR			= mkdir -p
 RM				= rm -rf
 
 
-CFLAGS			= -Wall -Wextra -Werror #-Ofast -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -Ofast #-g3 -fsanitize=address
 MLXFLAGS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 

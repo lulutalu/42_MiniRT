@@ -13,8 +13,6 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "utils.h"
-# include "miniRT.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
