@@ -51,3 +51,9 @@ http://three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/<br>
 ## Credits
 
 Made by [lduboulo](https://github.com/lulutalu) and [ngda-sil](https://github.com/ngda-sil)
+
+## Result
+
+<p align="center">
+<a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl2668aqb008909jp0ecnecpa/project/2825798" alt="lduboulo's 42 miniRT Score" /></a>
+</p>
